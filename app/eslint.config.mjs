@@ -5,5 +5,16 @@ import typescript from "eslint-config-next/typescript";
 export default defineConfig([
   coreWebVitals,
   typescript,
+  {
+    // No hard-coded user-facing strings — everything through @repo/i18n
+    // catalogs (golden rule 5). Props (className, ids, hrefs) are exempt.
+    files: ["**/*.tsx"],
+    rules: {
+      "react/jsx-no-literals": [
+        "error",
+        { noStrings: true, ignoreProps: true, noAttributeStrings: false },
+      ],
+    },
+  },
   globalIgnores([".next/**"]),
 ]);

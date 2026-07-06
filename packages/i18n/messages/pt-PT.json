@@ -1,0 +1,21 @@
+{
+  "app": {
+    "title": "ERP"
+  },
+  "home": {
+    "title": "Interface em construção",
+    "description": "Os tokens de design estão ativos — esta página usa as mesmas variáveis semânticas em modo claro e escuro.",
+    "buttons": {
+      "primary": "Primário",
+      "secondary": "Secundário",
+      "outline": "Contorno",
+      "destructive": "Destrutivo"
+    },
+    "badges": {
+      "success": "Sucesso",
+      "warning": "Aviso",
+      "danger": "Perigo",
+      "info": "Informação"
+    }
+  }
+}

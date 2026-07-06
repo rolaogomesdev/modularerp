@@ -14,7 +14,8 @@ Architecture references: [docs/architecture/](docs/architecture/00-overview.md).
 - [x] Next.js (App Router, TS strict) + pnpm workspaces skeleton (`app/`, `packages/ui|i18n|permissions|ai`, `modules/`) — packages scoped `@repo/*` per ADR-0001 (name stays cheap to change)
   - [ ] Follow-up: unpin ESLint (kept at v9 — eslint-config-next 16's plugins don't support ESLint 10 yet)
 - [x] Tailwind + shadcn/ui + token scaffolding (light/dark stubs per [09](docs/architecture/09-design-system.md)) — semantic tokens in `packages/ui` mapped to Tailwind v4 + shadcn bridge; first component (Button); `data-theme` override wiring lands with the Phase 2 profile
-- [ ] next-intl wired: `pt-PT` + `en` catalogs, no-literal-strings lint rule
+- [x] next-intl wired: `pt-PT` + `en` catalogs, no-literal-strings lint rule — locale = cookie override → device language → `pt-PT`; plugin bypassed (Smart App Control blocks `@swc/core`), `next-intl/config` aliased via Turbopack instead
+  - [ ] Follow-up: Windows Smart App Control blocks unsigned native npm binaries on this dev machine — verify `sharp` (image optimization) when first used; keep native-dep additions wasm/JS-friendly
 - [ ] Supabase: staging + prod projects (EU), local CLI dev loop, migration workflow ([05](docs/architecture/05-data-platform.md))
 - [ ] Core migrations: `profiles`, `companies`, `company_members` + RLS ([02](docs/architecture/02-tenancy-and-identity.md))
 - [ ] Auth: email/password sign-up/login, **forced TOTP enrollment**, AAL2 middleware, recovery codes

@@ -1,0 +1,21 @@
+{
+  "app": {
+    "title": "ERP"
+  },
+  "home": {
+    "title": "Shell under construction",
+    "description": "Design tokens are live — this page renders in light and dark from the same semantic variables.",
+    "buttons": {
+      "primary": "Primary",
+      "secondary": "Secondary",
+      "outline": "Outline",
+      "destructive": "Destructive"
+    },
+    "badges": {
+      "success": "Success",
+      "warning": "Warning",
+      "danger": "Danger",
+      "info": "Info"
+    }
+  }
+}
