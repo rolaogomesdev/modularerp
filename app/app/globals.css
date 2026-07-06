@@ -1,0 +1,5 @@
+@import "tailwindcss";
+@import "@repo/ui/styles.css";
+
+/* pick up token utility classes used inside packages/ui components */
+@source "../../packages/ui/src";

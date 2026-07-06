@@ -1,0 +1,91 @@
+/*
+ * Tailwind v4 theme mapping — exposes the semantic tokens (tokens.css) as
+ * utilities: bg-bg, bg-surface, text-text-muted, border-border, rounded-md,
+ * shadow-1, duration-fast, … Modules use these; never raw values.
+ */
+
+@theme inline {
+  /* colors */
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-faint: var(--text-faint);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-muted: var(--accent-muted);
+  --color-success: var(--success);
+  --color-success-bg: var(--success-bg);
+  --color-warning: var(--warning);
+  --color-warning-bg: var(--warning-bg);
+  --color-danger: var(--danger);
+  --color-danger-bg: var(--danger-bg);
+  --color-info: var(--info);
+  --color-info-bg: var(--info-bg);
+  --color-focus-ring: var(--focus-ring);
+
+  /* typography */
+  --font-sans: var(--font-sans);
+
+  /* radius → rounded-sm / rounded-md / rounded-lg / rounded-full */
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+
+  /* elevation → shadow-1 / shadow-2 / shadow-3 */
+  --shadow-1: var(--shadow-1);
+  --shadow-2: var(--shadow-2);
+  --shadow-3: var(--shadow-3);
+
+  /* motion → duration-fast / duration-base, ease-enter / ease-exit */
+  --duration-fast: var(--dur-fast);
+  --duration-base: var(--dur-base);
+  --ease-enter: var(--ease-enter);
+  --ease-exit: var(--ease-exit);
+}
+
+/*
+ * shadcn/ui bridge — shadcn components speak --background/--primary/…;
+ * they resolve FROM the semantic tokens so both themes and company accent
+ * branding apply without touching component code.
+ */
+:root {
+  --background: var(--bg);
+  --foreground: var(--text);
+  --card: var(--surface);
+  --card-foreground: var(--text);
+  --popover: var(--surface-raised);
+  --popover-foreground: var(--text);
+  --primary: var(--accent);
+  --primary-foreground: var(--accent-fg);
+  --secondary: var(--accent-muted);
+  --secondary-foreground: var(--text);
+  --muted: var(--accent-muted);
+  --muted-foreground: var(--text-muted);
+  --destructive: var(--danger);
+  --destructive-foreground: var(--accent-fg);
+  --input: var(--border-strong);
+  --ring: var(--focus-ring);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}

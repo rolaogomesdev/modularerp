@@ -1,0 +1,121 @@
+/*
+ * Design tokens — single source of truth (docs/architecture/09-design-system.md).
+ * Semantic variables only; no raw colors/sizes/shadows anywhere else.
+ *
+ * Themes: light + dark ship together (ADR-0001). Resolution:
+ *   - default follows the device (prefers-color-scheme)
+ *   - explicit override via data-theme="light|dark" on <html>
+ *     (the per-user setting UI lands with the personal profile, Phase 2)
+ *
+ * Company branding may override --accent* only (contrast-checked at save time).
+ */
+
+:root {
+  /* color — light */
+  --bg: oklch(0.985 0 0);
+  --surface: oklch(1 0 0);
+  --surface-raised: oklch(1 0 0);
+  --border: oklch(0.92 0 0);
+  --border-strong: oklch(0.84 0 0);
+  --text: oklch(0.21 0 0);
+  --text-muted: oklch(0.45 0 0);
+  --text-faint: oklch(0.6 0 0);
+  --accent: oklch(0.55 0.17 255);
+  --accent-fg: oklch(0.99 0 0);
+  --accent-muted: oklch(0.95 0.03 255);
+  --success: oklch(0.55 0.14 150);
+  --success-bg: oklch(0.96 0.04 150);
+  --warning: oklch(0.65 0.13 75);
+  --warning-bg: oklch(0.97 0.05 90);
+  --danger: oklch(0.55 0.2 27);
+  --danger-bg: oklch(0.96 0.03 27);
+  --info: oklch(0.55 0.13 235);
+  --info-bg: oklch(0.96 0.03 235);
+  --focus-ring: oklch(0.55 0.17 255);
+
+  /* typography — sizes/line-heights pair with Tailwind's default scale (12/14/16/18/20/24/30) */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+
+  /* radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* elevation — light theme leans on shadows */
+  --shadow-1: 0 1px 2px oklch(0 0 0 / 0.06);
+  --shadow-2: 0 2px 8px oklch(0 0 0 / 0.08);
+  --shadow-3: 0 8px 24px oklch(0 0 0 / 0.12);
+
+  /* motion */
+  --dur-fast: 150ms;
+  --dur-base: 250ms;
+  --ease-enter: cubic-bezier(0, 0, 0.2, 1); /* ease-out */
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1); /* ease-in */
+}
+
+/* dark values — kept in one block, applied two ways below */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: oklch(0.16 0 0);
+    --surface: oklch(0.2 0 0);
+    --surface-raised: oklch(0.24 0 0);
+    --border: oklch(0.3 0 0);
+    --border-strong: oklch(0.4 0 0);
+    --text: oklch(0.93 0 0);
+    --text-muted: oklch(0.7 0 0);
+    --text-faint: oklch(0.55 0 0);
+    --accent: oklch(0.65 0.15 255);
+    --accent-fg: oklch(0.99 0 0);
+    --accent-muted: oklch(0.3 0.05 255);
+    --success: oklch(0.7 0.14 150);
+    --success-bg: oklch(0.26 0.04 150);
+    --warning: oklch(0.75 0.13 80);
+    --warning-bg: oklch(0.27 0.05 90);
+    --danger: oklch(0.68 0.18 27);
+    --danger-bg: oklch(0.26 0.05 27);
+    --info: oklch(0.7 0.12 235);
+    --info-bg: oklch(0.26 0.04 235);
+    --focus-ring: oklch(0.65 0.15 255);
+
+    /* elevation — shadows lighten, borders strengthen in dark */
+    --shadow-1: 0 1px 2px oklch(0 0 0 / 0.4);
+    --shadow-2: 0 2px 8px oklch(0 0 0 / 0.45);
+    --shadow-3: 0 8px 24px oklch(0 0 0 / 0.5);
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: oklch(0.16 0 0);
+  --surface: oklch(0.2 0 0);
+  --surface-raised: oklch(0.24 0 0);
+  --border: oklch(0.3 0 0);
+  --border-strong: oklch(0.4 0 0);
+  --text: oklch(0.93 0 0);
+  --text-muted: oklch(0.7 0 0);
+  --text-faint: oklch(0.55 0 0);
+  --accent: oklch(0.65 0.15 255);
+  --accent-fg: oklch(0.99 0 0);
+  --accent-muted: oklch(0.3 0.05 255);
+  --success: oklch(0.7 0.14 150);
+  --success-bg: oklch(0.26 0.04 150);
+  --warning: oklch(0.75 0.13 80);
+  --warning-bg: oklch(0.27 0.05 90);
+  --danger: oklch(0.68 0.18 27);
+  --danger-bg: oklch(0.26 0.05 27);
+  --info: oklch(0.7 0.12 235);
+  --info-bg: oklch(0.26 0.04 235);
+  --focus-ring: oklch(0.65 0.15 255);
+  --shadow-1: 0 1px 2px oklch(0 0 0 / 0.4);
+  --shadow-2: 0 2px 8px oklch(0 0 0 / 0.45);
+  --shadow-3: 0 8px 24px oklch(0 0 0 / 0.5);
+}
+
+/* motion respects reduced-motion globally */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur-base: 0ms;
+  }
+}
