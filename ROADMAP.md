@@ -16,7 +16,8 @@ Architecture references: [docs/architecture/](docs/architecture/00-overview.md).
 - [x] Tailwind + shadcn/ui + token scaffolding (light/dark stubs per [09](docs/architecture/09-design-system.md)) — semantic tokens in `packages/ui` mapped to Tailwind v4 + shadcn bridge; first component (Button); `data-theme` override wiring lands with the Phase 2 profile
 - [x] next-intl wired: `pt-PT` + `en` catalogs, no-literal-strings lint rule — locale = cookie override → device language → `pt-PT`; plugin bypassed (Smart App Control blocks `@swc/core`), `next-intl/config` aliased via Turbopack instead
   - [ ] Follow-up: Windows Smart App Control blocks unsigned native npm binaries on this dev machine — verify `sharp` (image optimization) when first used; keep native-dep additions wasm/JS-friendly
-- [ ] Supabase: staging + prod projects (EU), local CLI dev loop, migration workflow ([05](docs/architecture/05-data-platform.md))
+- [x] Supabase: staging + prod projects (EU), local CLI dev loop, migration workflow ([05](docs/architecture/05-data-platform.md)) — staging `bhmgdrdlwmixxwxacfwq` + prod `upwdgbjpyenkylqbvfbj` (`eu-central-1`), repo linked to staging, workflow documented in `supabase/README.md`
+  - [ ] Follow-up: after Windows reboot (WSL2 pending), verify `supabase start` local loop under Docker Desktop
 - [ ] Core migrations: `profiles`, `companies`, `company_members` + RLS ([02](docs/architecture/02-tenancy-and-identity.md))
 - [ ] Auth: email/password sign-up/login, **forced TOTP enrollment**, AAL2 middleware, recovery codes
 - [ ] Tenancy shell: create company (wizard stub), invite/accept, company switcher, `/c/[slug]` routing
