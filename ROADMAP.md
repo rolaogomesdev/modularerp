@@ -17,8 +17,8 @@ Architecture references: [docs/architecture/](docs/architecture/00-overview.md).
 - [x] next-intl wired: `pt-PT` + `en` catalogs, no-literal-strings lint rule — locale = cookie override → device language → `pt-PT`; plugin bypassed (Smart App Control blocks `@swc/core`), `next-intl/config` aliased via Turbopack instead
   - [ ] Follow-up: Windows Smart App Control blocks unsigned native npm binaries on this dev machine — verify `sharp` (image optimization) when first used; keep native-dep additions wasm/JS-friendly
 - [x] Supabase: staging + prod projects (EU), local CLI dev loop, migration workflow ([05](docs/architecture/05-data-platform.md)) — staging `bhmgdrdlwmixxwxacfwq` + prod `upwdgbjpyenkylqbvfbj` (`eu-central-1`), repo linked to staging, workflow documented in `supabase/README.md`
-  - [ ] Follow-up: after Windows reboot (WSL2 pending), verify `supabase start` local loop under Docker Desktop
-- [ ] Core migrations: `profiles`, `companies`, `company_members` + RLS ([02](docs/architecture/02-tenancy-and-identity.md))
+  - [x] Follow-up: after Windows reboot (WSL2 pending), verify `supabase start` local loop under Docker Desktop — verified 2026-07-06, full stack healthy
+- [x] Core migrations: `profiles`, `companies`, `company_members` + RLS ([02](docs/architecture/02-tenancy-and-identity.md)) — AAL2-gated policies, signup trigger, `member_directory` safe view, column-guarded `app_role`; 20 pgTAP RLS tests green (incl. the aal1-reads-nothing exit criterion)
 - [ ] Auth: email/password sign-up/login, **forced TOTP enrollment**, AAL2 middleware, recovery codes
 - [ ] Tenancy shell: create company (wizard stub), invite/accept, company switcher, `/c/[slug]` routing
 - [ ] CI (GitHub Actions): lint, typecheck, unit, **RLS suite**, build, Vercel previews; deploy pipeline staging → prod
