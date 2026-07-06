@@ -10,7 +10,7 @@ Architecture references: [docs/architecture/](docs/architecture/00-overview.md).
 
 **Goal**: a deployed, authenticated, multi-company shell — empty but real.
 
-- [ ] `git init`, GitHub repo, branch protection on `main`
+- [x] `git init`, GitHub repo, branch protection on `main` ([rolaogomesdev/modularerp](https://github.com/rolaogomesdev/modularerp))
 - [ ] Next.js (App Router, TS strict) + pnpm workspaces skeleton (`app/`, `packages/ui|i18n|permissions|ai`, `modules/`)
 - [ ] Tailwind + shadcn/ui + token scaffolding (light/dark stubs per [09](docs/architecture/09-design-system.md))
 - [ ] next-intl wired: `pt-PT` + `en` catalogs, no-literal-strings lint rule
