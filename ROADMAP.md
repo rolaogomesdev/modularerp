@@ -54,7 +54,7 @@ Architecture references: [docs/architecture/](docs/architecture/00-overview.md).
 
 **Goal**: everything modules will reuse ([05](docs/architecture/05-data-platform.md), [09](docs/architecture/09-design-system.md)).
 
-- [ ] Design system v1: full token set (both themes), component inventory, screen patterns, both-theme visual regression
+- [ ] Design system v1: full token set (both themes), component inventory, screen patterns, both-theme visual regression — **including the desktop/big-screen pass**: every pattern defines phone (390px), desktop (sidebar, side sheets, data tables, multi-column detail) and large-display behaviour; modules never write their own breakpoints
 - [ ] Navigation shell: bottom tabs / sidebar, company switcher, notifications bell (Realtime), AssistantLauncher stub
 - [ ] Personal profile `/me`: avatar, locale, theme override, notification prefs, security self-service (password, 2FA devices, sessions)
 - [ ] Primitives: approvals (+ inbox tab, self-approval refused), notifications, comments & attachments, custom fields (defs UI + form/detail/export integration), CSV import (staged) / export (RLS-scoped)
@@ -153,6 +153,7 @@ Architecture references: [docs/architecture/](docs/architecture/00-overview.md).
 - **Checklists module** (production/operation/safety checklists: template builder, scheduled runs, mobile execution, AI review of answers) — small; good early proof of the module contract after HR
 - **Tickets module** (one module, configurable queues: software/IT, production/maintenance, internal requests; SLA timers, AI triage/dedup/suggested resolutions from RAG; consumes events — e.g. failed work order → auto-ticket)
 - **KPIs as first-class objects**: definitions + targets + thresholds over `rpt_*` views; module-default KPI seeds in the registry; cross-module executive dashboard; design Phase 2 StatCards with target/threshold states from day one
+- **TV/kiosk display mode**: admin-created display tokens scoped to one dashboard + narrow permissions (never a user session on a wall); auto-refresh via Realtime, read-only, big-typography layout, revocable from settings — production boards, KPI walls
 - **Module entitlements/billing**: modules as sellable products (plans decide what `company_modules.enabled` may be flipped); supersedes the bare "billing/plans" line (ADR when designed)
 - **Cross-module AI insights ("the spider web")**: a fifth AI surface that proactively correlates KPIs, events and rule packs across enabled modules and posts cited, suggestion-only insights into notifications; each purchased module densifies the web (per-user permission-scoped, as always)
 - **Enterprise readiness track** (the long-term SAP-alternative climb, in order): public API + webhooks over the event outbox (events are already versioned contracts) → legacy migration tooling (Primavera/Sage/SAP imports) → SCIM provisioning → per-tenant isolation options + data residency → sandbox companies → partner/implementer program. Beachhead first: the underserved 20–300-employee middle.

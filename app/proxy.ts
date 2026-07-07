@@ -4,12 +4,17 @@ import { NextResponse, type NextRequest } from "next/server";
 // Routes reachable without a session.
 const PUBLIC_PATHS = new Set(["/login", "/signup", "/design"]);
 
+// Where an interrupted visitor is sent back to after completing auth.
+// Only /join/<uuid> qualifies — never trust arbitrary paths from cookies.
+const RESUME_COOKIE = "resume-path";
+const RESUMABLE_RE = /^\/join\/[0-9a-f-]{36}$/i;
+
 /**
  * Session + AAL2 enforcement (02-tenancy-and-identity.md):
- *  - no session            -> /login
+ *  - no session            -> /login (invite links remembered via resume cookie)
  *  - aal1, no factor       -> forced 2FA enrollment (/2fa/enroll) — only reachable screen
  *  - aal1, factor enrolled -> 2FA challenge (/2fa/challenge) — only reachable screen
- *  - aal2                  -> app (auth screens redirect home)
+ *  - aal2                  -> app (auth screens redirect home; resume cookie honoured)
  * This is UX routing; the real enforcement is RLS (company data requires aal2).
  */
 export async function proxy(request: NextRequest) {
@@ -52,7 +57,18 @@ export async function proxy(request: NextRequest) {
   };
 
   if (!user) {
-    return PUBLIC_PATHS.has(path) ? response : redirect("/login");
+    if (PUBLIC_PATHS.has(path)) return response;
+    const toLogin = redirect("/login");
+    // An invitee interrupted by auth resumes their invite after sign-in + 2FA.
+    if (RESUMABLE_RE.test(path)) {
+      toLogin.cookies.set(RESUME_COOKIE, path, {
+        maxAge: 60 * 60, // survives signup + email confirmation detours
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+      });
+    }
+    return toLogin;
   }
 
   // Sign-out must work at any assurance level.
@@ -64,7 +80,18 @@ export async function proxy(request: NextRequest) {
   const next = aal?.nextLevel ?? "aal1";
 
   if (current === "aal2") {
-    // Fully authenticated: auth screens bounce home.
+    // Fully authenticated: honour a pending invite resume first.
+    const resume = request.cookies.get(RESUME_COOKIE)?.value;
+    if (resume && RESUMABLE_RE.test(resume) && path !== resume) {
+      const toResume = redirect(resume);
+      toResume.cookies.delete(RESUME_COOKIE);
+      return toResume;
+    }
+    if (resume && path === resume) {
+      response.cookies.delete(RESUME_COOKIE);
+      return response;
+    }
+    // Auth screens bounce home.
     if (PUBLIC_PATHS.has(path) && path !== "/design") return redirect("/");
     if (path.startsWith("/2fa")) return redirect("/");
     return response;
