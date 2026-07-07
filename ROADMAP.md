@@ -33,7 +33,8 @@ Architecture references: [docs/architecture/](docs/architecture/00-overview.md).
   - [ ] Follow-up: create Sentry project + set `SENTRY_DSN`/`NEXT_PUBLIC_SENTRY_DSN` in Vercel
   - [ ] Follow-up: real app icon from the Sorusoft logo (placeholder = accent square); Serwist service worker (offline) lands with Phase 2/3 offline work
   - [ ] Follow-up: Smart App Control now blocks the local Supabase CLI Go binary — local loop uses `docker exec psql` meanwhile; investigate WSL-distro CLI or signed distribution
-- [ ] Compliance stubs: processing register, incident runbook ([07](docs/architecture/07-security-compliance.md))
+- [x] Compliance stubs: processing register, incident runbook ([07](docs/architecture/07-security-compliance.md)) — RGPD art. 30 register (Phase 0 activities + processors) and executable runbook (severities, today's kill-switches, CNPD 72h, post-mortem-as-ADR) in `docs/architecture/compliance/`
+  - [ ] Follow-up: move Vercel functions to an EU region before real-customer data; sign DPAs (Supabase, Vercel, Sentry) before launch
 
 **Exit criteria**: fresh phone → install PWA → sign up → enroll 2FA → create company → invite a second user who accepts and sees the (empty) company; an `aal1` session reads nothing (test-proven); CI red on a tenant table without RLS test.
 **Manual due**: getting-started refreshed against the real flows (screens exist now); sign-in & 2FA page.
