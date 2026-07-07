@@ -1,35 +1,63 @@
+import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
+import { CreateCompanyForm } from "@/components/create-company-form";
 import { createClient } from "@/lib/supabase/server";
 
-// TODO(phase-0): becomes the "create a company or accept an invitation" shell
-// with the tenancy item; for now it proves the authenticated AAL2 state.
 export default async function HomePage() {
-  const t = await getTranslations("home");
+  const t = await getTranslations("tenancy");
   const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { data: companies } = await supabase
+    .from("companies")
+    .select("id, name, slug")
+    .order("name");
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-md flex-col justify-center gap-6 p-6">
-      <header className="flex flex-col gap-1">
-        <h1 className="text-2xl font-semibold">{t("title")}</h1>
-        <p className="text-sm text-text-muted">
-          {t("signedInAs", { email: user?.email ?? "" })}
-        </p>
+    <main className="mx-auto flex min-h-dvh max-w-md flex-col gap-8 p-6">
+      <header className="flex flex-col gap-1 pt-6">
+        <h1 className="text-2xl font-semibold">{t("home.title")}</h1>
+        <p className="text-sm text-text-muted">{t("home.subtitle")}</p>
       </header>
 
-      <section className="rounded-lg border border-border bg-surface p-4 text-sm text-text-muted shadow-1">
-        {t("nextUp")}
+      {companies && companies.length > 0 ? (
+        <section className="flex flex-col gap-2">
+          <h2 className="text-sm font-medium text-text-muted">
+            {t("home.yourCompanies")}
+          </h2>
+          <ul className="flex flex-col gap-2">
+            {companies.map((company) => {
+              const displayPath = `/${company.slug}`;
+              return (
+                <li key={company.id}>
+                  <Link
+                    href={`/c/${company.slug}`}
+                    className="flex items-center justify-between rounded-lg border border-border bg-surface p-4 shadow-1 transition-colors duration-fast hover:bg-accent-muted"
+                  >
+                    <span className="font-medium">{company.name}</span>
+                    <span className="text-sm text-text-faint">{displayPath}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ) : (
+        <p className="rounded-lg border border-border bg-surface p-4 text-sm text-text-muted shadow-1">
+          {t("home.empty")}
+        </p>
+      )}
+
+      <section className="flex flex-col gap-3 rounded-lg border border-border bg-surface p-4 shadow-1">
+        <h2 className="font-medium">{t("home.createTitle")}</h2>
+        <CreateCompanyForm />
       </section>
 
-      <form action="/auth/signout" method="post">
+      <form action="/auth/signout" method="post" className="pb-6 text-center">
         <button
           type="submit"
           className="text-sm text-text-faint underline-offset-4 hover:underline"
         >
-          {t("signOut")}
+          {t("common.signOut")}
         </button>
       </form>
     </main>

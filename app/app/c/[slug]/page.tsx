@@ -1,0 +1,83 @@
+import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
+
+import { InviteForm } from "@/components/invite-form";
+import { createClient } from "@/lib/supabase/server";
+
+export default async function CompanyHomePage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const t = await getTranslations("tenancy");
+  const supabase = await createClient();
+
+  const { data: company } = await supabase
+    .from("companies")
+    .select("id, name, slug, country_code, currency")
+    .eq("slug", slug)
+    .maybeSingle();
+  if (!company) notFound();
+
+  const [{ data: members }, { data: directory }] = await Promise.all([
+    supabase
+      .from("company_members")
+      .select("id, user_id, status, invited_email, joined_at")
+      .eq("company_id", company.id)
+      .order("created_at"),
+    supabase.from("member_directory").select("id, display_name"),
+  ]);
+
+  const nameOf = new Map((directory ?? []).map((d) => [d.id, d.display_name]));
+  const statusStyle: Record<string, string> = {
+    active: "bg-success-bg text-success",
+    invited: "bg-warning-bg text-warning",
+    suspended: "bg-danger-bg text-danger",
+  };
+
+  return (
+    <main className="flex flex-col gap-6 p-4">
+      <section className="rounded-lg border border-border bg-surface p-4 shadow-1">
+        <h1 className="text-xl font-semibold">{company.name}</h1>
+        <p className="text-sm text-text-muted">
+          {t("company.meta", {
+            country: company.country_code,
+            currency: company.currency,
+          })}
+        </p>
+        <p className="mt-2 text-sm text-text-muted">{t("company.emptyState")}</p>
+      </section>
+
+      <section className="flex flex-col gap-3">
+        <h2 className="text-sm font-medium text-text-muted">
+          {t("company.members")}
+        </h2>
+        <ul className="flex flex-col gap-2">
+          {(members ?? []).map((member) => (
+            <li
+              key={member.id}
+              className="flex items-center justify-between rounded-lg border border-border bg-surface px-4 py-3 shadow-1"
+            >
+              <span className="text-sm font-medium">
+                {member.user_id
+                  ? (nameOf.get(member.user_id) ?? t("company.unknownMember"))
+                  : member.invited_email}
+              </span>
+              <span
+                className={`rounded-full px-2.5 py-0.5 text-xs ${statusStyle[member.status] ?? ""}`}
+              >
+                {t(`company.status.${member.status}`)}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="flex flex-col gap-3 rounded-lg border border-border bg-surface p-4 shadow-1">
+        <h2 className="font-medium">{t("invite.title")}</h2>
+        <InviteForm companyId={company.id} />
+      </section>
+    </main>
+  );
+}

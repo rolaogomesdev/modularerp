@@ -2,11 +2,59 @@
   "app": {
     "title": "ERP"
   },
-  "home": {
-    "title": "Sessão iniciada",
-    "signedInAs": "Com sessão iniciada como {email} — verificação em dois passos concluída.",
-    "nextUp": "A seguir: criar uma empresa ou aceitar um convite. Esse fluxo chega com o próximo item do roteiro.",
-    "signOut": "Terminar sessão"
+  "tenancy": {
+    "common": {
+      "working": "Aguarde…",
+      "signOut": "Terminar sessão"
+    },
+    "home": {
+      "title": "As suas empresas",
+      "subtitle": "Abra uma empresa ou crie uma nova.",
+      "yourCompanies": "As suas empresas",
+      "empty": "Ainda não é membro de nenhuma empresa. Crie uma abaixo ou peça uma ligação de convite a um colega.",
+      "createTitle": "Criar uma empresa"
+    },
+    "create": {
+      "nameLabel": "Nome da empresa",
+      "slugLabel": "Endereço web",
+      "slugHelp": "O endereço da sua empresa na aplicação: /c/{slug}",
+      "submit": "Criar empresa"
+    },
+    "switcher": {
+      "allCompanies": "Todas as empresas"
+    },
+    "company": {
+      "meta": "País: {country} · Moeda: {currency}",
+      "emptyState": "Esta empresa está vazia por agora — os módulos (RH, Finanças…) chegam nas próximas fases.",
+      "members": "Membros",
+      "unknownMember": "Membro",
+      "status": {
+        "active": "Ativo",
+        "invited": "Convidado",
+        "suspended": "Suspenso"
+      }
+    },
+    "invite": {
+      "title": "Convidar alguém",
+      "emailLabel": "Email",
+      "emailHelp": "O convite fica associado exatamente a este endereço de email.",
+      "emailPlaceholder": "colega@empresa.pt",
+      "submit": "Criar convite",
+      "created": "Convite criado — partilhe esta ligação:",
+      "copy": "Copiar ligação"
+    },
+    "join": {
+      "title": "Recebeu um convite",
+      "subtitle": "Ao aceitar, esta empresa é adicionada à sua conta. Mantém um único início de sessão para tudo.",
+      "accept": "Aceitar convite"
+    },
+    "errors": {
+      "invalidInput": "Alguns campos são inválidos. Verifique-os e tente novamente.",
+      "conflict": "Já existe — endereços de empresa e convites têm de ser únicos.",
+      "notAllowed": "Não tem permissão para isso. Se o convite é seu, inicie sessão com o email convidado.",
+      "inviteInvalid": "Esta ligação de convite é inválida ou já foi usada. Peça uma nova.",
+      "unknown": "Ocorreu um erro. Tente novamente — se persistir, contacte o suporte."
+    }
   },
   "auth": {
     "fields": {

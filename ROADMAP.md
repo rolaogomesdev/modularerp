@@ -23,7 +23,8 @@ Architecture references: [docs/architecture/](docs/architecture/00-overview.md).
   - [ ] Follow-up: self-service recovery codes (needs a design that keeps service-role out of request paths — golden rule; ADR candidate)
   - [ ] Follow-up: confirm TOTP enroll/verify is enabled on hosted staging + prod (dashboard → Auth → MFA)
   - [ ] Follow-up: browser-level auth E2E (Playwright) lands with the CI item
-- [ ] Tenancy shell: create company (wizard stub), invite/accept, company switcher, `/c/[slug]` routing
+- [x] Tenancy shell: create company (wizard stub), invite/accept, company switcher, `/c/[slug]` routing — RPCs (aal2-gated, single-use email-bound tokens, token column unreadable), 16 more pgTAP tests, full API E2E green
+  - [ ] Follow-up: invitation email sending (link is copy/paste for now); return-to-invite redirect after login; invite revoke UI (Phase 1 with `platform.member.manage`)
 - [ ] CI (GitHub Actions): lint, typecheck, unit, **RLS suite**, build, Vercel previews; deploy pipeline staging → prod
 - [ ] Sentry + Vercel Analytics; seed script with demo company + personas
 - [ ] Compliance stubs: processing register, incident runbook ([07](docs/architecture/07-security-compliance.md))
@@ -151,6 +152,7 @@ Architecture references: [docs/architecture/](docs/architecture/00-overview.md).
 - **KPIs as first-class objects**: definitions + targets + thresholds over `rpt_*` views; module-default KPI seeds in the registry; cross-module executive dashboard; design Phase 2 StatCards with target/threshold states from day one
 - **Module entitlements/billing**: modules as sellable products (plans decide what `company_modules.enabled` may be flipped); supersedes the bare "billing/plans" line (ADR when designed)
 - **Cross-module AI insights ("the spider web")**: a fifth AI surface that proactively correlates KPIs, events and rule packs across enabled modules and posts cited, suggestion-only insights into notifications; each purchased module densifies the web (per-user permission-scoped, as always)
+- **Enterprise readiness track** (the long-term SAP-alternative climb, in order): public API + webhooks over the event outbox (events are already versioned contracts) → legacy migration tooling (Primavera/Sage/SAP imports) → SCIM provisioning → per-tenant isolation options + data residency → sandbox companies → partner/implementer program. Beachhead first: the underserved 20–300-employee middle.
 - Per-company **SSO** (AD/Entra ID, Google, Microsoft) + directory sync (AD groups → teams); break-glass support access (consented, audited)
 - More countries (rule packs + locale packs); accounting module + SAF-T accounting variant; Relatório Único
 - Inventory, Sales/CRM, Procurement, Projects modules

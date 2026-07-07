@@ -2,11 +2,59 @@
   "app": {
     "title": "ERP"
   },
-  "home": {
-    "title": "You're in",
-    "signedInAs": "Signed in as {email} — two-step verification complete.",
-    "nextUp": "Next up: create a company or accept an invitation. That flow arrives with the next roadmap item.",
-    "signOut": "Sign out"
+  "tenancy": {
+    "common": {
+      "working": "Please wait…",
+      "signOut": "Sign out"
+    },
+    "home": {
+      "title": "Your companies",
+      "subtitle": "Open a company, or create a new one.",
+      "yourCompanies": "Your companies",
+      "empty": "You're not a member of any company yet. Create one below, or ask a colleague for an invitation link.",
+      "createTitle": "Create a company"
+    },
+    "create": {
+      "nameLabel": "Company name",
+      "slugLabel": "Web address",
+      "slugHelp": "Your company's address in the app: /c/{slug}",
+      "submit": "Create company"
+    },
+    "switcher": {
+      "allCompanies": "All companies"
+    },
+    "company": {
+      "meta": "Country: {country} · Currency: {currency}",
+      "emptyState": "This company is empty for now — modules (HR, Finance…) arrive in the next phases.",
+      "members": "Members",
+      "unknownMember": "Member",
+      "status": {
+        "active": "Active",
+        "invited": "Invited",
+        "suspended": "Suspended"
+      }
+    },
+    "invite": {
+      "title": "Invite someone",
+      "emailLabel": "Email",
+      "emailHelp": "The invitation is tied to this exact email address.",
+      "emailPlaceholder": "colleague@company.com",
+      "submit": "Create invitation",
+      "created": "Invitation created — share this link with them:",
+      "copy": "Copy link"
+    },
+    "join": {
+      "title": "You've been invited",
+      "subtitle": "Accepting adds this company to your account. You keep one login for everything.",
+      "accept": "Accept invitation"
+    },
+    "errors": {
+      "invalidInput": "Some fields are invalid. Check them and try again.",
+      "conflict": "That already exists — company addresses and invitations must be unique.",
+      "notAllowed": "You don't have permission for that. If this is your invitation, sign in with the invited email address.",
+      "inviteInvalid": "This invitation link is invalid or was already used. Ask for a new one.",
+      "unknown": "Something went wrong. Try again — if it persists, contact support."
+    }
   },
   "auth": {
     "fields": {
