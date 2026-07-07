@@ -11,7 +11,8 @@ Architecture references: [docs/architecture/](docs/architecture/00-overview.md).
 **Goal**: a deployed, authenticated, multi-company shell — empty but real.
 
 - [x] `git init`, GitHub repo, branch protection on `main` ([rolaogomesdev/modularerp](https://github.com/rolaogomesdev/modularerp))
-- [ ] Next.js (App Router, TS strict) + pnpm workspaces skeleton (`app/`, `packages/ui|i18n|permissions|ai`, `modules/`)
+- [x] Next.js (App Router, TS strict) + pnpm workspaces skeleton (`app/`, `packages/ui|i18n|permissions|ai`, `modules/`) — packages scoped `@repo/*` per ADR-0001 (name stays cheap to change)
+  - [ ] Follow-up: unpin ESLint (kept at v9 — eslint-config-next 16's plugins don't support ESLint 10 yet)
 - [ ] Tailwind + shadcn/ui + token scaffolding (light/dark stubs per [09](docs/architecture/09-design-system.md))
 - [ ] next-intl wired: `pt-PT` + `en` catalogs, no-literal-strings lint rule
 - [ ] Supabase: staging + prod projects (EU), local CLI dev loop, migration workflow ([05](docs/architecture/05-data-platform.md))
