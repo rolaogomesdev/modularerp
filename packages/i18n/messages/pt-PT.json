@@ -1,0 +1,86 @@
+{
+  "app": {
+    "title": "ERP"
+  },
+  "home": {
+    "title": "Sessão iniciada",
+    "signedInAs": "Com sessão iniciada como {email} — verificação em dois passos concluída.",
+    "nextUp": "A seguir: criar uma empresa ou aceitar um convite. Esse fluxo chega com o próximo item do roteiro.",
+    "signOut": "Terminar sessão"
+  },
+  "auth": {
+    "fields": {
+      "displayName": "Nome",
+      "email": "Email",
+      "password": "Palavra-passe",
+      "totpCode": "Código de 6 dígitos"
+    },
+    "common": {
+      "working": "Aguarde…",
+      "signOut": "Terminar sessão"
+    },
+    "login": {
+      "title": "Iniciar sessão",
+      "subtitle": "Use o email e a palavra-passe da sua conta.",
+      "submit": "Entrar",
+      "noAccount": "Ainda não tem conta?",
+      "signupLink": "Criar conta"
+    },
+    "signup": {
+      "title": "Criar a sua conta",
+      "subtitle": "Uma conta serve para todas as suas empresas.",
+      "passwordHelp": "Pelo menos 8 caracteres.",
+      "submit": "Criar conta",
+      "haveAccount": "Já tem conta?",
+      "loginLink": "Iniciar sessão",
+      "confirmTitle": "Verifique o seu email",
+      "confirmBody": "Enviámos-lhe uma ligação de confirmação. Abra-a para ativar a conta e depois inicie sessão."
+    },
+    "enroll": {
+      "title": "Configurar a verificação em dois passos",
+      "subtitle": "Obrigatória antes de continuar — protege recibos de vencimento, contratos e outros dados sensíveis.",
+      "step1": "Instale uma aplicação de autenticação (Google Authenticator, Microsoft Authenticator, 1Password…).",
+      "step2": "Leia o código QR com a aplicação (ou introduza a chave por baixo).",
+      "step3": "Introduza o código de 6 dígitos apresentado pela aplicação.",
+      "qrAlt": "Código QR para ler com a aplicação de autenticação",
+      "submit": "Ativar",
+      "recoveryNote": "Se perder o telemóvel, o administrador ou o suporte podem repor a verificação em dois passos depois de confirmar a sua identidade."
+    },
+    "challenge": {
+      "title": "Verificação em dois passos",
+      "subtitle": "Introduza o código de 6 dígitos da aplicação de autenticação.",
+      "submit": "Verificar",
+      "lostDevice": "Perdeu o telemóvel? Contacte o administrador ou o suporte para repor a verificação em dois passos."
+    },
+    "errors": {
+      "invalid_credentials": "Email ou palavra-passe errados. Verifique ambos e tente novamente.",
+      "user_already_exists": "Já existe uma conta com este email — inicie sessão.",
+      "weak_password": "A palavra-passe é demasiado fraca. Use pelo menos 8 caracteres, misturando letras e números.",
+      "over_request_rate_limit": "Demasiadas tentativas. Aguarde um minuto e tente novamente.",
+      "mfa_verification_failed": "O código não corresponde. Confirme na aplicação e introduza o código atual.",
+      "validation_failed": "Alguns campos são inválidos. Verifique-os e tente novamente.",
+      "unknown": "Ocorreu um erro. Tente novamente — se persistir, contacte o suporte."
+    }
+  },
+  "design": {
+    "title": "Tokens de design",
+    "description": "Teste do pipeline de tokens — as mesmas variáveis semânticas em modo claro e escuro.",
+    "buttons": {
+      "primary": "Primário",
+      "secondary": "Secundário",
+      "outline": "Contorno",
+      "destructive": "Destrutivo"
+    },
+    "badges": {
+      "success": "Sucesso",
+      "warning": "Aviso",
+      "danger": "Perigo",
+      "info": "Informação"
+    },
+    "field": {
+      "label": "Etiqueta do campo",
+      "help": "O texto de ajuda explica o campo.",
+      "placeholder": "Exemplo"
+    }
+  }
+}

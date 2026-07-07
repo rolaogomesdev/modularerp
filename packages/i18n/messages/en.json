@@ -1,0 +1,86 @@
+{
+  "app": {
+    "title": "ERP"
+  },
+  "home": {
+    "title": "You're in",
+    "signedInAs": "Signed in as {email} — two-step verification complete.",
+    "nextUp": "Next up: create a company or accept an invitation. That flow arrives with the next roadmap item.",
+    "signOut": "Sign out"
+  },
+  "auth": {
+    "fields": {
+      "displayName": "Name",
+      "email": "Email",
+      "password": "Password",
+      "totpCode": "6-digit code"
+    },
+    "common": {
+      "working": "Please wait…",
+      "signOut": "Sign out"
+    },
+    "login": {
+      "title": "Sign in",
+      "subtitle": "Use your work account email and password.",
+      "submit": "Sign in",
+      "noAccount": "No account yet?",
+      "signupLink": "Create one"
+    },
+    "signup": {
+      "title": "Create your account",
+      "subtitle": "One account works across all your companies.",
+      "passwordHelp": "At least 8 characters.",
+      "submit": "Create account",
+      "haveAccount": "Already have an account?",
+      "loginLink": "Sign in",
+      "confirmTitle": "Check your email",
+      "confirmBody": "We sent you a confirmation link. Open it to activate your account, then sign in."
+    },
+    "enroll": {
+      "title": "Set up two-step verification",
+      "subtitle": "Required before you can continue — it protects payslips, contracts and other sensitive data.",
+      "step1": "Install an authenticator app (Google Authenticator, Microsoft Authenticator, 1Password…).",
+      "step2": "Scan the QR code with the app (or type the key below it).",
+      "step3": "Enter the 6-digit code the app shows.",
+      "qrAlt": "QR code to scan with your authenticator app",
+      "submit": "Activate",
+      "recoveryNote": "If you lose your phone, your administrator or support can reset two-step verification after confirming your identity."
+    },
+    "challenge": {
+      "title": "Two-step verification",
+      "subtitle": "Enter the 6-digit code from your authenticator app.",
+      "submit": "Verify",
+      "lostDevice": "Lost your phone? Contact your administrator or support to reset two-step verification."
+    },
+    "errors": {
+      "invalid_credentials": "Wrong email or password. Check both and try again.",
+      "user_already_exists": "An account with this email already exists — sign in instead.",
+      "weak_password": "That password is too weak. Use at least 8 characters, mixing letters and numbers.",
+      "over_request_rate_limit": "Too many attempts. Wait a minute and try again.",
+      "mfa_verification_failed": "That code didn't match. Check the app and enter the current code.",
+      "validation_failed": "Some fields are invalid. Check them and try again.",
+      "unknown": "Something went wrong. Try again — if it persists, contact support."
+    }
+  },
+  "design": {
+    "title": "Design tokens",
+    "description": "Smoke test for the token pipeline — same semantic variables in light and dark.",
+    "buttons": {
+      "primary": "Primary",
+      "secondary": "Secondary",
+      "outline": "Outline",
+      "destructive": "Destructive"
+    },
+    "badges": {
+      "success": "Success",
+      "warning": "Warning",
+      "danger": "Danger",
+      "info": "Info"
+    },
+    "field": {
+      "label": "Field label",
+      "help": "Help text explains the field.",
+      "placeholder": "Placeholder"
+    }
+  }
+}

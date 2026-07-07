@@ -13,11 +13,16 @@ Architecture references: [docs/architecture/](docs/architecture/00-overview.md).
 - [x] `git init`, GitHub repo, branch protection on `main` ([rolaogomesdev/modularerp](https://github.com/rolaogomesdev/modularerp))
 - [x] Next.js (App Router, TS strict) + pnpm workspaces skeleton (`app/`, `packages/ui|i18n|permissions|ai`, `modules/`) — packages scoped `@repo/*` per ADR-0001 (name stays cheap to change)
   - [ ] Follow-up: unpin ESLint (kept at v9 — eslint-config-next 16's plugins don't support ESLint 10 yet)
-- [ ] Tailwind + shadcn/ui + token scaffolding (light/dark stubs per [09](docs/architecture/09-design-system.md))
-- [ ] next-intl wired: `pt-PT` + `en` catalogs, no-literal-strings lint rule
-- [ ] Supabase: staging + prod projects (EU), local CLI dev loop, migration workflow ([05](docs/architecture/05-data-platform.md))
-- [ ] Core migrations: `profiles`, `companies`, `company_members` + RLS ([02](docs/architecture/02-tenancy-and-identity.md))
-- [ ] Auth: email/password sign-up/login, **forced TOTP enrollment**, AAL2 middleware, recovery codes
+- [x] Tailwind + shadcn/ui + token scaffolding (light/dark stubs per [09](docs/architecture/09-design-system.md)) — semantic tokens in `packages/ui` mapped to Tailwind v4 + shadcn bridge; first component (Button); `data-theme` override wiring lands with the Phase 2 profile
+- [x] next-intl wired: `pt-PT` + `en` catalogs, no-literal-strings lint rule — locale = cookie override → device language → `pt-PT`; plugin bypassed (Smart App Control blocks `@swc/core`), `next-intl/config` aliased via Turbopack instead
+  - [ ] Follow-up: Windows Smart App Control blocks unsigned native npm binaries on this dev machine — verify `sharp` (image optimization) when first used; keep native-dep additions wasm/JS-friendly
+- [x] Supabase: staging + prod projects (EU), local CLI dev loop, migration workflow ([05](docs/architecture/05-data-platform.md)) — staging `bhmgdrdlwmixxwxacfwq` + prod `upwdgbjpyenkylqbvfbj` (`eu-central-1`), repo linked to staging, workflow documented in `supabase/README.md`
+  - [x] Follow-up: after Windows reboot (WSL2 pending), verify `supabase start` local loop under Docker Desktop — verified 2026-07-06, full stack healthy
+- [x] Core migrations: `profiles`, `companies`, `company_members` + RLS ([02](docs/architecture/02-tenancy-and-identity.md)) — AAL2-gated policies, signup trigger, `member_directory` safe view, column-guarded `app_role`; 20 pgTAP RLS tests green (incl. the aal1-reads-nothing exit criterion)
+- [x] Auth: email/password sign-up/login, **forced TOTP enrollment**, AAL2 middleware, recovery codes — screens live (pt-PT/en), proxy enforces enroll→challenge→app routing, API-E2E proven to AAL2; recovery = admin/support reset for now
+  - [ ] Follow-up: self-service recovery codes (needs a design that keeps service-role out of request paths — golden rule; ADR candidate)
+  - [ ] Follow-up: confirm TOTP enroll/verify is enabled on hosted staging + prod (dashboard → Auth → MFA)
+  - [ ] Follow-up: browser-level auth E2E (Playwright) lands with the CI item
 - [ ] Tenancy shell: create company (wizard stub), invite/accept, company switcher, `/c/[slug]` routing
 - [ ] CI (GitHub Actions): lint, typecheck, unit, **RLS suite**, build, Vercel previews; deploy pipeline staging → prod
 - [ ] Sentry + Vercel Analytics; seed script with demo company + personas
@@ -140,9 +145,15 @@ Architecture references: [docs/architecture/](docs/architecture/00-overview.md).
 ## Later / ideas (parking lot)
 
 - **Training module** (courses, certifications, mandatory training — linked to HR records)
+- **Bookings module** (appointments/reservations — the small-company entry point; resource + staff calendars, AI scheduling assistant)
+- **Checklists module** (production/operation/safety checklists: template builder, scheduled runs, mobile execution, AI review of answers) — small; good early proof of the module contract after HR
+- **Tickets module** (one module, configurable queues: software/IT, production/maintenance, internal requests; SLA timers, AI triage/dedup/suggested resolutions from RAG; consumes events — e.g. failed work order → auto-ticket)
+- **KPIs as first-class objects**: definitions + targets + thresholds over `rpt_*` views; module-default KPI seeds in the registry; cross-module executive dashboard; design Phase 2 StatCards with target/threshold states from day one
+- **Module entitlements/billing**: modules as sellable products (plans decide what `company_modules.enabled` may be flipped); supersedes the bare "billing/plans" line (ADR when designed)
+- **Cross-module AI insights ("the spider web")**: a fifth AI surface that proactively correlates KPIs, events and rule packs across enabled modules and posts cited, suggestion-only insights into notifications; each purchased module densifies the web (per-user permission-scoped, as always)
 - Per-company **SSO** (AD/Entra ID, Google, Microsoft) + directory sync (AD groups → teams); break-glass support access (consented, audited)
 - More countries (rule packs + locale packs); accounting module + SAF-T accounting variant; Relatório Único
 - Inventory, Sales/CRM, Procurement, Projects modules
 - Web push notifications; WebAuthn/biometric factor; native app wrapper (only if PWA proves insufficient)
 - AI: anomaly-detection models for Security; scheduled analyst reports v2; onboarding copilot
-- Billing/plans for the platform itself; sandbox/training company generator; team-hierarchy scope cascade (ADR needed)
+- Sandbox/training company generator; team-hierarchy scope cascade (ADR needed)

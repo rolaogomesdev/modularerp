@@ -1,0 +1,3 @@
+/* @repo/ui styles entry — import once from the app's globals.css, after tailwindcss. */
+@import "./tokens.css";
+@import "./theme.css";
