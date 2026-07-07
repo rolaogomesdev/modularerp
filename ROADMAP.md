@@ -29,7 +29,10 @@ Architecture references: [docs/architecture/](docs/architecture/00-overview.md).
   - [ ] Follow-up: Vercel project + previews (needs Vercel account connection — dashboard Git integration or CLI token)
   - [ ] Follow-up: repo secrets `SUPABASE_ACCESS_TOKEN`, `SUPABASE_STAGING_DB_PASSWORD`, `SUPABASE_PROD_DB_PASSWORD` (deploy workflow guards until set)
   - [ ] Follow-up: company wizard v2 — ask sector (coarse + optional CAE) and size band at creation; progressive profile (NIF when Finance enables)
-- [ ] Sentry + Vercel Analytics; seed script with demo company + personas
+- [x] Sentry + Vercel Analytics; seed script with demo company + personas — PWA manifest + icons folded in (standalone install works); Sentry env-gated (no-op without DSN); seed: Demo Lda + Marta/João/Rita (`demo-password-123`, local only, login E2E-proven)
+  - [ ] Follow-up: create Sentry project + set `SENTRY_DSN`/`NEXT_PUBLIC_SENTRY_DSN` in Vercel
+  - [ ] Follow-up: real app icon from the Sorusoft logo (placeholder = accent square); Serwist service worker (offline) lands with Phase 2/3 offline work
+  - [ ] Follow-up: Smart App Control now blocks the local Supabase CLI Go binary — local loop uses `docker exec psql` meanwhile; investigate WSL-distro CLI or signed distribution
 - [ ] Compliance stubs: processing register, incident runbook ([07](docs/architecture/07-security-compliance.md))
 
 **Exit criteria**: fresh phone → install PWA → sign up → enroll 2FA → create company → invite a second user who accepts and sees the (empty) company; an `aal1` session reads nothing (test-proven); CI red on a tenant table without RLS test.

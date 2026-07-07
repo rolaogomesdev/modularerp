@@ -1,11 +1,17 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages, getTranslations } from "next-intl/server";
 import "./globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("app");
-  return { title: t("title") };
+  return {
+    title: t("title"),
+    icons: { apple: "/icon-192.png" },
+    // iOS treats installed web apps separately from the manifest
+    appleWebApp: { capable: true, title: t("title") },
+  };
 }
 
 export const viewport: Viewport = {
@@ -28,6 +34,8 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>
+        {/* no-op outside Vercel */}
+        <Analytics />
       </body>
     </html>
   );

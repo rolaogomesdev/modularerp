@@ -4,6 +4,7 @@ packages:
   - modules/*
 allowBuilds:
   '@parcel/watcher': true
+  '@sentry/cli': false
   '@swc/core': true
   sharp: true
   unrs-resolver: true
