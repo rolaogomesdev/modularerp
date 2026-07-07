@@ -29,9 +29,8 @@ Your account protects personal data like payslips, so a password alone is not en
 
 1. Open your authenticator app and scan the QR code shown.
 2. Enter the 6-digit code to confirm.
-3. **Save your recovery codes** somewhere safe — they are the only way back in if you lose your phone.
 
-From then on, signing in = password + the 6-digit code from your app.
+From then on, signing in = password + the 6-digit code from your app. If you ever lose your phone, contact your administrator or support — after confirming your identity they can reset two-step verification. Full details: [Signing in & two-step verification](../concepts/sign-in-and-2fa.md).
 
 ## 3. Install the app on your phone
 

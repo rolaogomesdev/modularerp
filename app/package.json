@@ -13,6 +13,8 @@
     "@repo/i18n": "workspace:*",
     "@repo/permissions": "workspace:*",
     "@repo/ui": "workspace:*",
+    "@supabase/ssr": "^0.12.0",
+    "@supabase/supabase-js": "^2.110.0",
     "next": "^16.2.10",
     "next-intl": "^4.13.1",
     "react": "^19.2.7",

@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { getLocale } from "next-intl/server";
-import { getTranslations } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages, getTranslations } from "next-intl/server";
 import "./globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -19,11 +19,16 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const locale = await getLocale();
+  const messages = await getMessages();
   // suppressHydrationWarning: data-theme is set client-side once the per-user
   // theme override ships (personal profile, Phase 2); default follows the device.
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className="bg-bg font-sans text-text antialiased">{children}</body>
+      <body className="bg-bg font-sans text-text antialiased">
+        <NextIntlClientProvider messages={messages}>
+          {children}
+        </NextIntlClientProvider>
+      </body>
     </html>
   );
 }
