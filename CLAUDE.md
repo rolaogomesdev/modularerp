@@ -1,4 +1,4 @@
-# CLAUDE.md — Modular ERP (working title)
+# CLAUDE.md — Soru (by Sorusoft)
 
 Mobile-first, AI-native, **modular ERP**: one web application that manages a company end-to-end — HR, Finance, Production, Inventory, Sales, and more — multi-company, multi-country, with granular team/role permissions and an AI layer that analyses data and tracks legislation per country.
 
@@ -9,7 +9,7 @@ AI: **Claude API** (Sonnet 5 as default workhorse, Haiku for high-volume extract
 
 ## Founding decisions (ADR-0001)
 
-- Working name **"Modular ERP"** — renaming must stay cheap; never bake the name into identifiers, schemas or URLs.
+- Product name **"Soru"**, company **Sorusoft** (ADR-0003; formerly working title "Modular ERP") — the rename-stays-cheap rule survives: never bake the name into identifiers, schemas or URLs.
 - Launch market **Portugal** (PT primary, EN secondary); more countries later via country rule packs + locale packs, never by touching module code.
 - Module order: **HR → Finance → Production**, then the Security module (intrusion detection & tooling for company security teams — roadmap Phase 8) and Training (HR-family: courses, certifications).
 - Auth: Supabase **email/password + mandatory TOTP 2FA**. Per-company SSO (AD/Entra ID, Google, Microsoft) is a designed-for upgrade; 2FA stays enforced regardless of provider.

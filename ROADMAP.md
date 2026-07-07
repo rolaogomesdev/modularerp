@@ -1,4 +1,4 @@
-# ROADMAP — Modular ERP
+# ROADMAP — Soru
 
 **This file is the single source of truth for what to do next.** Every session: pick the next unchecked item in the active phase, meet the Definition of Done in [CLAUDE.md](CLAUDE.md), tick it, add discovered follow-ups. A phase closes only when its exit criteria pass and its manual chapters exist.
 

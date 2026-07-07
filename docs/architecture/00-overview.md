@@ -1,6 +1,6 @@
 # 00 — Overview
 
-**Modular ERP** (working title) is a mobile-first, AI-native web application that manages a company from start to finish: HR, Finance, Production, Training, and later Inventory, Sales/CRM, Procurement and Projects. One deployment hosts many companies; each company enables the modules it needs, organizes people into teams with granular role-based permissions, and gets an AI layer that analyses its data and keeps it compliant with its country's legislation.
+**Soru** (by Sorusoft; formerly working title "Modular ERP" — ADR-0003) is a mobile-first, AI-native web application that manages a company from start to finish: HR, Finance, Production, Training, and later Inventory, Sales/CRM, Procurement and Projects. One deployment hosts many companies; each company enables the modules it needs, organizes people into teams with granular role-based permissions, and gets an AI layer that analyses its data and keeps it compliant with its country's legislation.
 
 Launch market: **Portugal** (PT primary, EN secondary). Demo stack: **GitHub + Vercel + Supabase**.
 
