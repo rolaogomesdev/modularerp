@@ -1,6 +1,6 @@
 # User manual — rules of the house
 
-This folder is the **user manual** for Modular ERP and the **knowledge base of the in-app AI help assistant**. It is served in-app at `/help`, filtered by audience. It is written for users — no developer jargon, no internal codenames.
+This folder is the **user manual** for Soru and the **knowledge base of the in-app AI help assistant**. It is served in-app at `/help`, filtered by audience. It is written for users — no developer jargon, no internal codenames.
 
 ## Structure
 

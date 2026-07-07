@@ -13,7 +13,7 @@ updated: 2026-07-06
 
 # Getting started
 
-Welcome! Modular ERP is where your company manages day-to-day work — your absences, payslips, expenses, tasks on the shop floor. It works best on your phone.
+Welcome! Soru is where your company manages day-to-day work — your absences, payslips, expenses, tasks on the shop floor. It works best on your phone.
 
 ## 1. Create your account
 
@@ -34,7 +34,7 @@ From then on, signing in = password + the 6-digit code from your app. If you eve
 
 ## 3. Install the app on your phone
 
-Modular ERP is a web app you can install — no app store needed:
+Soru is a web app you can install — no app store needed:
 
 - **Android/Chrome**: menu ⋮ → *Add to Home screen*.
 - **iPhone/Safari**: Share □↑ → *Add to Home Screen*.

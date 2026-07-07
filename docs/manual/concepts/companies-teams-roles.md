@@ -13,7 +13,7 @@ updated: 2026-07-06
 
 # Companies, teams & roles — how access works
 
-Everything you can see and do in Modular ERP follows four simple ideas.
+Everything you can see and do in Soru follows four simple ideas.
 
 ## 1. Companies
 

@@ -1,4 +1,4 @@
-# Claude Code kickoff prompt — Modular ERP
+# Claude Code kickoff prompt — Soru
 
 **How to use:** open Claude Code in this folder and paste everything below the line — or simply say:
 
@@ -43,7 +43,7 @@ You are the founding architect and lead engineer of a new product: a **mobile-fi
 
 Record these in `docs/architecture/adr/ADR-0001-founding-decisions.md`:
 
-1. **Product name**: "Modular ERP" (working title). Renaming later must stay cheap — never bake the name into identifiers, schemas or URLs.
+1. **Product name**: "Soru" by Sorusoft (ADR-0003). The rename-stays-cheap rule survives: never bake the name into identifiers, schemas or URLs.
 2. **Launch market**: Portugal — PT primary, EN secondary. Other countries later via rule packs + locale packs.
 3. **Module order**: **HR first**, then Finance, then Production; Training (course & certification management) follows as an HR-family module. Rationale: every other module references people, teams and roles, and HR exercises the permission system hardest (salaries → field-level sensitivity; absences → approval workflows).
 4. **Auth**: Supabase email/password + **mandatory TOTP 2FA** for the demo; per-company SSO (AD/Entra ID, Google, Microsoft) is a designed-for upgrade, with 2FA enforced regardless of provider.
