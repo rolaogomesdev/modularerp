@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
@@ -16,7 +17,13 @@ const createCompanySchema = z.object({
 
 const inviteSchema = z.object({
   companyId: z.string().uuid(),
+  companySlug: z.string().min(1).max(40),
   email: z.string().trim().toLowerCase().email().max(254),
+});
+
+const revokeSchema = z.object({
+  invitationId: z.string().uuid(),
+  companySlug: z.string().min(1).max(40),
 });
 
 /** Maps Postgres/RPC error codes to i18n keys under `tenancy.errors.*`. */
@@ -64,6 +71,7 @@ export async function inviteMember(
 ): Promise<ActionState> {
   const parsed = inviteSchema.safeParse({
     companyId: formData.get("companyId"),
+    companySlug: formData.get("companySlug"),
     email: formData.get("email"),
   });
   if (!parsed.success) return { errorKey: "invalidInput" };
@@ -75,7 +83,28 @@ export async function inviteMember(
   });
 
   if (error || !data) return { errorKey: rpcErrorKey(error?.code, "unknown") };
+  revalidatePath(`/c/${parsed.data.companySlug}`);
   return { token: data as string };
+}
+
+export async function revokeInvitation(
+  _prev: ActionState,
+  formData: FormData
+): Promise<ActionState> {
+  const parsed = revokeSchema.safeParse({
+    invitationId: formData.get("invitationId"),
+    companySlug: formData.get("companySlug"),
+  });
+  if (!parsed.success) return { errorKey: "invalidInput" };
+
+  const supabase = await createClient();
+  const { error } = await supabase.rpc("revoke_invitation", {
+    invitation_id: parsed.data.invitationId,
+  });
+
+  if (error) return { errorKey: rpcErrorKey(error.code, "unknown") };
+  revalidatePath(`/c/${parsed.data.companySlug}`);
+  return null;
 }
 
 export async function acceptInvitation(

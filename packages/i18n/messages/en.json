@@ -40,8 +40,9 @@
       "emailHelp": "The invitation is tied to this exact email address.",
       "emailPlaceholder": "colleague@company.com",
       "submit": "Create invitation",
-      "created": "Invitation created — share this link with them:",
-      "copy": "Copy link"
+      "created": "Invitation created — share this link with them (valid for 14 days):",
+      "copy": "Copy link",
+      "revoke": "Revoke"
     },
     "join": {
       "title": "You've been invited",

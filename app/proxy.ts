@@ -56,19 +56,23 @@ export async function proxy(request: NextRequest) {
     return redirectResponse;
   };
 
+  const wantsResume = RESUMABLE_RE.test(path);
+  const withResumeCookie = (res: NextResponse) => {
+    res.cookies.set(RESUME_COOKIE, path, {
+      maxAge: 60 * 60, // survives signup + email confirmation detours
+      httpOnly: true,
+      sameSite: "lax",
+      path: "/",
+    });
+    return res;
+  };
+
   if (!user) {
     if (PUBLIC_PATHS.has(path)) return response;
-    const toLogin = redirect("/login");
-    // An invitee interrupted by auth resumes their invite after sign-in + 2FA.
-    if (RESUMABLE_RE.test(path)) {
-      toLogin.cookies.set(RESUME_COOKIE, path, {
-        maxAge: 60 * 60, // survives signup + email confirmation detours
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-      });
-    }
-    return toLogin;
+    // Invitees are usually new users — signup first (it cross-links to login),
+    // and the invite is resumed after auth completes.
+    if (wantsResume) return withResumeCookie(redirect("/signup"));
+    return redirect("/login");
   }
 
   // Sign-out must work at any assurance level.
@@ -99,11 +103,15 @@ export async function proxy(request: NextRequest) {
 
   if (next === "aal2") {
     // Factor enrolled, second step pending: challenge is the only screen.
-    return path === "/2fa/challenge" ? response : redirect("/2fa/challenge");
+    if (path === "/2fa/challenge") return response;
+    const toChallenge = redirect("/2fa/challenge");
+    return wantsResume ? withResumeCookie(toChallenge) : toChallenge;
   }
 
   // No factor yet: enrollment is forced (02-tenancy-and-identity.md).
-  return path === "/2fa/enroll" ? response : redirect("/2fa/enroll");
+  if (path === "/2fa/enroll") return response;
+  const toEnroll = redirect("/2fa/enroll");
+  return wantsResume ? withResumeCookie(toEnroll) : toEnroll;
 }
 
 export const config = {

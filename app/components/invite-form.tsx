@@ -6,7 +6,13 @@ import { Button, Field, Input } from "@repo/ui";
 
 import { inviteMember, type ActionState } from "@/lib/actions/tenancy";
 
-export function InviteForm({ companyId }: { companyId: string }) {
+export function InviteForm({
+  companyId,
+  companySlug,
+}: {
+  companyId: string;
+  companySlug: string;
+}) {
   const t = useTranslations("tenancy");
   const [state, action, pending] = useActionState<ActionState, FormData>(
     inviteMember,
@@ -19,6 +25,7 @@ export function InviteForm({ companyId }: { companyId: string }) {
     <div className="flex flex-col gap-3">
       <form action={action} className="flex flex-col gap-3">
         <input type="hidden" name="companyId" value={companyId} />
+        <input type="hidden" name="companySlug" value={companySlug} />
         <Field
           label={t("invite.emailLabel")}
           htmlFor="invite-email"
