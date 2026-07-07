@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
 import { InviteForm } from "@/components/invite-form";
+import { RevokeInviteButton } from "@/components/revoke-invite-button";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function CompanyHomePage({
@@ -57,17 +58,25 @@ export default async function CompanyHomePage({
           {(members ?? []).map((member) => (
             <li
               key={member.id}
-              className="flex items-center justify-between rounded-lg border border-border bg-surface px-4 py-3 shadow-1"
+              className="flex items-center justify-between gap-2 rounded-lg border border-border bg-surface px-4 py-3 shadow-1"
             >
-              <span className="text-sm font-medium">
+              <span className="min-w-0 truncate text-sm font-medium">
                 {member.user_id
                   ? (nameOf.get(member.user_id) ?? t("company.unknownMember"))
                   : member.invited_email}
               </span>
-              <span
-                className={`rounded-full px-2.5 py-0.5 text-xs ${statusStyle[member.status] ?? ""}`}
-              >
-                {t(`company.status.${member.status}`)}
+              <span className="flex shrink-0 items-center gap-2">
+                <span
+                  className={`rounded-full px-2.5 py-0.5 text-xs ${statusStyle[member.status] ?? ""}`}
+                >
+                  {t(`company.status.${member.status}`)}
+                </span>
+                {member.user_id === null && member.status === "invited" ? (
+                  <RevokeInviteButton
+                    invitationId={member.id}
+                    companySlug={company.slug}
+                  />
+                ) : null}
               </span>
             </li>
           ))}
@@ -76,7 +85,7 @@ export default async function CompanyHomePage({
 
       <section className="flex flex-col gap-3 rounded-lg border border-border bg-surface p-4 shadow-1">
         <h2 className="font-medium">{t("invite.title")}</h2>
-        <InviteForm companyId={company.id} />
+        <InviteForm companyId={company.id} companySlug={company.slug} />
       </section>
     </main>
   );

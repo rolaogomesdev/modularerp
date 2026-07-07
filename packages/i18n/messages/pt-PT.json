@@ -40,8 +40,9 @@
       "emailHelp": "O convite fica associado exatamente a este endereço de email.",
       "emailPlaceholder": "colega@empresa.pt",
       "submit": "Criar convite",
-      "created": "Convite criado — partilhe esta ligação:",
-      "copy": "Copiar ligação"
+      "created": "Convite criado — partilhe esta ligação (válida por 14 dias):",
+      "copy": "Copiar ligação",
+      "revoke": "Revogar"
     },
     "join": {
       "title": "Recebeu um convite",
