@@ -25,7 +25,10 @@ Architecture references: [docs/architecture/](docs/architecture/00-overview.md).
   - [ ] Follow-up: browser-level auth E2E (Playwright) lands with the CI item
 - [x] Tenancy shell: create company (wizard stub), invite/accept, company switcher, `/c/[slug]` routing — RPCs (aal2-gated, single-use email-bound tokens, token column unreadable), 16 more pgTAP tests, full API E2E green
   - [ ] Follow-up: invitation email sending (link is copy/paste for now); return-to-invite redirect after login; invite revoke UI (Phase 1 with `platform.member.manage`)
-- [ ] CI (GitHub Actions): lint, typecheck, unit, **RLS suite**, build, Vercel previews; deploy pipeline staging → prod
+- [x] CI (GitHub Actions): lint, typecheck, unit, **RLS suite**, build, Vercel previews; deploy pipeline staging → prod — `ci.yml` (quality + pgTAP suite + RLS-coverage gate: tenant table without RLS test = red) and `deploy-db.yml` (staging → prod migrations on main)
+  - [ ] Follow-up: Vercel project + previews (needs Vercel account connection — dashboard Git integration or CLI token)
+  - [ ] Follow-up: repo secrets `SUPABASE_ACCESS_TOKEN`, `SUPABASE_STAGING_DB_PASSWORD`, `SUPABASE_PROD_DB_PASSWORD` (deploy workflow guards until set)
+  - [ ] Follow-up: company wizard v2 — ask sector (coarse + optional CAE) and size band at creation; progressive profile (NIF when Finance enables)
 - [ ] Sentry + Vercel Analytics; seed script with demo company + personas
 - [ ] Compliance stubs: processing register, incident runbook ([07](docs/architecture/07-security-compliance.md))
 
