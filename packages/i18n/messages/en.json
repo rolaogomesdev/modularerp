@@ -48,6 +48,9 @@
       "subtitle": "Accepting adds this company to your account. You keep one login for everything.",
       "accept": "Accept invitation"
     },
+    "invitations": {
+      "title": "Pending invitations"
+    },
     "errors": {
       "invalidInput": "Some fields are invalid. Check them and try again.",
       "conflict": "That already exists — company addresses and invitations must be unique.",

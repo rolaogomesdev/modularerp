@@ -48,6 +48,9 @@
       "subtitle": "Ao aceitar, esta empresa é adicionada à sua conta. Mantém um único início de sessão para tudo.",
       "accept": "Aceitar convite"
     },
+    "invitations": {
+      "title": "Convites pendentes"
+    },
     "errors": {
       "invalidInput": "Alguns campos são inválidos. Verifique-os e tente novamente.",
       "conflict": "Já existe — endereços de empresa e convites têm de ser únicos.",

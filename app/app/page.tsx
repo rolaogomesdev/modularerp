@@ -1,16 +1,21 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
+import { AcceptInviteForm } from "@/components/accept-invite-form";
 import { CreateCompanyForm } from "@/components/create-company-form";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function HomePage() {
   const t = await getTranslations("tenancy");
   const supabase = await createClient();
-  const { data: companies } = await supabase
-    .from("companies")
-    .select("id, name, slug")
-    .order("name");
+  const [{ data: companies }, { data: invitations }] = await Promise.all([
+    supabase.from("companies").select("id, name, slug").order("name"),
+    supabase.rpc("my_invitations") as unknown as Promise<{
+      data:
+        | { invite_token: string; company_name: string; invited_at: string }[]
+        | null;
+    }>,
+  ]);
 
   return (
     <main className="mx-auto flex min-h-dvh max-w-md flex-col gap-8 p-6">
@@ -18,6 +23,25 @@ export default async function HomePage() {
         <h1 className="text-2xl font-semibold">{t("home.title")}</h1>
         <p className="text-sm text-text-muted">{t("home.subtitle")}</p>
       </header>
+
+      {invitations && invitations.length > 0 ? (
+        <section className="flex flex-col gap-2">
+          <h2 className="text-sm font-medium text-text-muted">
+            {t("invitations.title")}
+          </h2>
+          <ul className="flex flex-col gap-2">
+            {invitations.map((invitation) => (
+              <li
+                key={invitation.invite_token}
+                className="flex items-center justify-between gap-3 rounded-lg border border-accent bg-accent-muted p-4"
+              >
+                <span className="font-medium">{invitation.company_name}</span>
+                <AcceptInviteForm token={invitation.invite_token} compact />
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
 
       {companies && companies.length > 0 ? (
         <section className="flex flex-col gap-2">
