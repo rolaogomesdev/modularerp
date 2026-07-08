@@ -16,6 +16,8 @@ function adminErrorKey(code: string | undefined): string {
       return "notAllowed";
     case "23514":
       return "invalidInput";
+    case "PT001":
+      return "ownerProtected";
     default:
       return "unknown";
   }

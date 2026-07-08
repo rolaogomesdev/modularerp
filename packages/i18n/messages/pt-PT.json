@@ -124,7 +124,8 @@
     "errors": {
       "invalidInput": "Alguns campos são inválidos. Verifique-os e tente novamente.",
       "conflict": "Já existe.",
-      "notAllowed": "Não tem permissão para isso.",
+      "notAllowed": "Não tem permissão para isso — só pode conceder ou atribuir o que você próprio detém.",
+      "ownerProtected": "Protegido: uma empresa mantém sempre pelo menos um Proprietário ativo, e o perfil Proprietário não pode ser enfraquecido.",
       "unknown": "Ocorreu um erro. Tente novamente — se persistir, contacte o suporte."
     }
   },

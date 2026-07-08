@@ -124,7 +124,8 @@
     "errors": {
       "invalidInput": "Some fields are invalid. Check them and try again.",
       "conflict": "That already exists.",
-      "notAllowed": "You don't have permission for that.",
+      "notAllowed": "You don't have permission for that — you can only grant or assign what you yourself hold.",
+      "ownerProtected": "Protected: a company always keeps at least one active Owner, and the Owner role cannot be weakened.",
       "unknown": "Something went wrong. Try again — if it persists, contact support."
     }
   },
