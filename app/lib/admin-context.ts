@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { createAuthorize } from "@repo/permissions";
 
 import { createClient } from "@/lib/supabase/server";
 
@@ -27,16 +28,13 @@ export async function getAdminContext(slug: string): Promise<AdminContext> {
     .maybeSingle();
   if (!company) notFound();
 
-  const check = (permission: string) =>
-    supabase
-      .rpc("authorize", { p_permission: permission, p_company: company.id })
-      .then(({ data }) => data === true);
-
+  const authorize = createAuthorize(supabase);
+  const companyId = company.id;
   const [manageTeams, manageMembers, manageRoles, readAudit] = await Promise.all([
-    check("platform.team.manage"),
-    check("platform.member.manage"),
-    check("platform.role.manage"),
-    check("platform.audit.read"),
+    authorize({ permission: "platform.team.manage", companyId }),
+    authorize({ permission: "platform.member.manage", companyId }),
+    authorize({ permission: "platform.role.manage", companyId }),
+    authorize({ permission: "platform.audit.read", companyId }),
   ]);
 
   const can = {

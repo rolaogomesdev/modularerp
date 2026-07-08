@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
+import { authorizeAny, createAuthorize } from "@repo/permissions";
 
 import { InviteForm } from "@/components/invite-form";
+import { PermissionGate } from "@/components/permission-gate";
 import { RevokeInviteButton } from "@/components/revoke-invite-button";
 import { createClient } from "@/lib/supabase/server";
 
@@ -23,23 +25,12 @@ export default async function CompanyHomePage({
   if (!company) notFound();
 
   const t2 = await getTranslations("admin");
-  const [{ data: canMembers }, { data: canTeams }, { data: canRoles }] =
-    await Promise.all([
-      supabase.rpc("authorize", {
-        p_permission: "platform.member.manage",
-        p_company: company.id,
-      }),
-      supabase.rpc("authorize", {
-        p_permission: "platform.team.manage",
-        p_company: company.id,
-      }),
-      supabase.rpc("authorize", {
-        p_permission: "platform.role.manage",
-        p_company: company.id,
-      }),
-    ]);
-  const canAdmin =
-    canMembers === true || canTeams === true || canRoles === true;
+  const authorize = createAuthorize(supabase);
+  const canAdmin = await authorizeAny(authorize, company.id, [
+    "platform.member.manage",
+    "platform.team.manage",
+    "platform.role.manage",
+  ]);
 
   const [{ data: members }, { data: directory }] = await Promise.all([
     supabase
@@ -100,10 +91,15 @@ export default async function CompanyHomePage({
                   {t(`company.status.${member.status}`)}
                 </span>
                 {member.user_id === null && member.status === "invited" ? (
-                  <RevokeInviteButton
-                    invitationId={member.id}
-                    companySlug={company.slug}
-                  />
+                  <PermissionGate
+                    permission="platform.member.manage"
+                    companyId={company.id}
+                  >
+                    <RevokeInviteButton
+                      invitationId={member.id}
+                      companySlug={company.slug}
+                    />
+                  </PermissionGate>
                 ) : null}
               </span>
             </li>
@@ -111,10 +107,14 @@ export default async function CompanyHomePage({
         </ul>
       </section>
 
-      <section className="flex flex-col gap-3 rounded-lg border border-border bg-surface p-4 shadow-1">
-        <h2 className="font-medium">{t("invite.title")}</h2>
-        <InviteForm companyId={company.id} companySlug={company.slug} />
-      </section>
+      {/* Inviting requires platform.member.manage (Phase 1 tightening) —
+          the gate hides the form; the RPC refuses regardless. */}
+      <PermissionGate permission="platform.member.manage" companyId={company.id}>
+        <section className="flex flex-col gap-3 rounded-lg border border-border bg-surface p-4 shadow-1">
+          <h2 className="font-medium">{t("invite.title")}</h2>
+          <InviteForm companyId={company.id} companySlug={company.slug} />
+        </section>
+      </PermissionGate>
     </main>
   );
 }
