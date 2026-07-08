@@ -4,3 +4,4 @@ export { cn } from "./lib/utils";
 export { Button, buttonVariants, type ButtonProps } from "./components/button";
 export { Input } from "./components/input";
 export { Field, Label } from "./components/field";
+export { NativeSelect } from "./components/native-select";

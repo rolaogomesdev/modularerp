@@ -60,6 +60,74 @@
       "unknown": "Ocorreu um erro. Tente novamente — se persistir, contacte o suporte."
     }
   },
+  "admin": {
+    "title": "Definições",
+    "subtitle": "Equipas, membros e perfis de {company}.",
+    "back": "Voltar à empresa",
+    "common": {
+      "working": "Aguarde…",
+      "create": "Criar",
+      "save": "Guardar",
+      "none": "Nenhum"
+    },
+    "nav": {
+      "teams": "Equipas",
+      "teamsHint": "Organize as pessoas em equipas",
+      "members": "Membros",
+      "membersHint": "Atribua perfis, suspenda acessos",
+      "roles": "Perfis",
+      "rolesHint": "O que cada perfil pode fazer"
+    },
+    "teams": {
+      "title": "Equipas",
+      "empty": "Ainda não há equipas.",
+      "createTitle": "Criar uma equipa",
+      "nameLabel": "Nome da equipa",
+      "submit": "Criar equipa",
+      "membershipCount": "{count, plural, =0 {sem atribuições} one {# atribuição} other {# atribuições}}"
+    },
+    "members": {
+      "title": "Membros",
+      "suspended": "Suspenso",
+      "active": "Ativo",
+      "invited": "Convidado",
+      "suspend": "Suspender",
+      "reactivate": "Reativar",
+      "noRoles": "Ainda sem perfil atribuído",
+      "assignTitle": "Atribuir um perfil",
+      "memberLabel": "Membro",
+      "teamLabel": "Equipa",
+      "roleLabel": "Perfil",
+      "validToLabel": "Válido até (opcional)",
+      "validToHelp": "Defina uma data de fim para uma atribuição temporária ou delegação — expira automaticamente.",
+      "submit": "Atribuir",
+      "remove": "Remover",
+      "until": "até {date}",
+      "delegationsTitle": "Atribuições temporárias",
+      "delegationsEmpty": "Sem atribuições temporárias."
+    },
+    "roles": {
+      "title": "Perfis",
+      "createTitle": "Criar um perfil",
+      "nameLabel": "Nome do perfil",
+      "descriptionLabel": "Descrição (opcional)",
+      "submit": "Criar perfil",
+      "matrixTitle": "Permissões de {role}",
+      "matrixHelp": "Escolha um âmbito por permissão: Próprio = registos sobre a pessoa, Equipa = registos da sua equipa, Empresa = tudo. A base de dados é quem impõe — a aplicação apenas reflete.",
+      "sensitive": "Sensível",
+      "scopeNone": "—",
+      "scopeOwn": "Próprio",
+      "scopeTeam": "Equipa",
+      "scopeCompany": "Empresa",
+      "templateBadge": "Modelo"
+    },
+    "errors": {
+      "invalidInput": "Alguns campos são inválidos. Verifique-os e tente novamente.",
+      "conflict": "Já existe.",
+      "notAllowed": "Não tem permissão para isso.",
+      "unknown": "Ocorreu um erro. Tente novamente — se persistir, contacte o suporte."
+    }
+  },
   "auth": {
     "fields": {
       "displayName": "Nome",

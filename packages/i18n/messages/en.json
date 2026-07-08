@@ -60,6 +60,74 @@
       "unknown": "Something went wrong. Try again — if it persists, contact support."
     }
   },
+  "admin": {
+    "title": "Settings",
+    "subtitle": "Teams, members and roles for {company}.",
+    "back": "Back to company",
+    "common": {
+      "working": "Please wait…",
+      "create": "Create",
+      "save": "Save",
+      "none": "None"
+    },
+    "nav": {
+      "teams": "Teams",
+      "teamsHint": "Organize people into teams",
+      "members": "Members",
+      "membersHint": "Assign roles, suspend access",
+      "roles": "Roles",
+      "rolesHint": "What each role is allowed to do"
+    },
+    "teams": {
+      "title": "Teams",
+      "empty": "No teams yet.",
+      "createTitle": "Create a team",
+      "nameLabel": "Team name",
+      "submit": "Create team",
+      "membershipCount": "{count, plural, =0 {no assignments} one {# assignment} other {# assignments}}"
+    },
+    "members": {
+      "title": "Members",
+      "suspended": "Suspended",
+      "active": "Active",
+      "invited": "Invited",
+      "suspend": "Suspend",
+      "reactivate": "Reactivate",
+      "noRoles": "No role assigned yet",
+      "assignTitle": "Assign a role",
+      "memberLabel": "Member",
+      "teamLabel": "Team",
+      "roleLabel": "Role",
+      "validToLabel": "Valid until (optional)",
+      "validToHelp": "Set an end date for a temporary assignment or delegation — it expires automatically.",
+      "submit": "Assign",
+      "remove": "Remove",
+      "until": "until {date}",
+      "delegationsTitle": "Time-bound assignments",
+      "delegationsEmpty": "No time-bound assignments."
+    },
+    "roles": {
+      "title": "Roles",
+      "createTitle": "Create a role",
+      "nameLabel": "Role name",
+      "descriptionLabel": "Description (optional)",
+      "submit": "Create role",
+      "matrixTitle": "Permissions for {role}",
+      "matrixHelp": "Pick a scope per permission: Own = rows about the person, Team = their team's rows, Company = everything. The database enforces these — the app only mirrors them.",
+      "sensitive": "Sensitive",
+      "scopeNone": "—",
+      "scopeOwn": "Own",
+      "scopeTeam": "Team",
+      "scopeCompany": "Company",
+      "templateBadge": "Template"
+    },
+    "errors": {
+      "invalidInput": "Some fields are invalid. Check them and try again.",
+      "conflict": "That already exists.",
+      "notAllowed": "You don't have permission for that.",
+      "unknown": "Something went wrong. Try again — if it persists, contact support."
+    }
+  },
   "auth": {
     "fields": {
       "displayName": "Name",
