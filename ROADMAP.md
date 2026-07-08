@@ -49,9 +49,9 @@ Architecture references: [docs/architecture/](docs/architecture/00-overview.md).
 - [x] Admin UI (`/c/[slug]/settings`): Teams, Members (invite/assign/suspend), Roles matrix (scope picker, sensitive flags), Delegations (time-bound) — capability-gated hub + 3 sub-pages, 7 audited server actions, suspend/reactivate via RLS-gated update; authenticated E2E proven (Owner 200s, roleless 404s, link hides); manual page live
 - [x] Escalation guards: can't grant what you don't hold; last-Owner protection (tested) — DB triggers: grant guard (scope-ranked), role-assignment guard (a role = its whole permission set), Owner-role shield (grants immutable, role undeletable), four lockout paths refused; internal bootstrap bypass; 16 attack tests (127 total)
 - [x] `PermissionGate` + `packages/permissions` pre-check client — dependency-free `createAuthorize` (per-request cached, fails closed), server `PermissionGate` factory, client `PermissionsProvider`/`usePermission`; first vitest unit tests in CI; dogfooded across admin-context/company page; **invite/revoke tightened to `platform.member.manage`** (Phase 0 stub retired, UI gated + RPC enforced)
-- [ ] Full RLS test matrix: personas × scopes × the [03](docs/architecture/03-permissions.md) worked examples
+- [x] Full RLS test matrix: personas × scopes × the [03](docs/architecture/03-permissions.md) worked examples — examples 1–5 as automated tests on canonical-pattern tables; permission changes audited by DB triggers (even raw API writes); delegation expiry proven by clock-skew; 147 pgTAP tests total
 
-**Exit criteria**: worked examples 1–5 from 03 pass as automated tests; role changes visible in audit log; delegation auto-expires (clock-skewed test).
+**Exit criteria**: worked examples 1–5 from 03 pass as automated tests; role changes visible in audit log; delegation auto-expires (clock-skewed test). ✅ **Phase 1 closed 2026-07-08** — manual due met (concepts page live + company-admin how-tos live).
 **Manual due**: concepts page (companies/teams/roles/permissions) verified against UI; company-admin how-tos: create team, build role, assign, delegate.
 
 ## Phase 2 — Platform shell & primitives

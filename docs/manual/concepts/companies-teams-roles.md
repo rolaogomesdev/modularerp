@@ -6,9 +6,9 @@ feature: permissions
 permissions: []
 path: Settings → Teams / Settings → Roles
 countries: [all]
-status: planned
+status: live
 locale: en
-updated: 2026-07-06
+updated: 2026-07-08
 ---
 
 # Companies, teams & roles — how access works
@@ -41,9 +41,9 @@ Each permission inside a role has a **reach**:
 
 ## What this looks like day to day
 
-- You only see modules, menus and buttons you have permission for. Nothing you can't use is shown.
-- When something is off-limits, the app names the missing permission — "You need *Approve absences* (`hr.absence.approve`) — ask your administrator" — so the conversation with your admin is easy.
-- Especially private data (like salaries) is locked behind its own dedicated permission, marked ⚠ in the role editor, so it is never included by accident.
+- You only see menus, forms and buttons you have permission for. Nothing you can't use is shown.
+- When something is off-limits, the app says so plainly; as the business modules arrive, messages name the exact permission to ask your administrator for.
+- Especially private data (like salaries) is locked behind its own dedicated permission, marked **Sensitive** in the role editor, so it is never included by accident.
 - Every change to roles, teams and memberships is recorded in the company audit trail.
 - These rules are enforced in the database itself — the same rules apply to the app, to exports, and to the AI assistant, which can never see more than *you* can.
 
