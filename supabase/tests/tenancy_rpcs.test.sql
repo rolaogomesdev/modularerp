@@ -3,7 +3,7 @@
 begin;
 create extension if not exists pgtap with schema extensions;
 
-select plan(16);
+select plan(17);
 
 insert into auth.users (id, email, raw_user_meta_data)
 values
@@ -147,6 +147,11 @@ select results_eq(
   'select slug from public.companies',
   $$values ('padaria-silva')$$,
   'eva sees the company after accepting'
+);
+select throws_ok(
+  $$select public.invite_member((select company_id from ctx), 'newbie@example.com')$$,
+  '42501', null,
+  'plain member cannot invite (requires platform.member.manage — Phase 1 tightening)'
 );
 select throws_ok(
   $$select * from public.accept_invitation((select invite_token from invite))$$,

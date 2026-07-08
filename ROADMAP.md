@@ -48,7 +48,7 @@ Architecture references: [docs/architecture/](docs/architecture/00-overview.md).
 - [x] `audit_log` primitive + write-path helper (server actions log mutations) — append-only by construction (no direct inserts, no update/delete grants for anyone), actor stamped by definer paths, reads gated by sensitive `platform.audit.read`; all four existing mutation RPCs now audited
 - [x] Admin UI (`/c/[slug]/settings`): Teams, Members (invite/assign/suspend), Roles matrix (scope picker, sensitive flags), Delegations (time-bound) — capability-gated hub + 3 sub-pages, 7 audited server actions, suspend/reactivate via RLS-gated update; authenticated E2E proven (Owner 200s, roleless 404s, link hides); manual page live
 - [x] Escalation guards: can't grant what you don't hold; last-Owner protection (tested) — DB triggers: grant guard (scope-ranked), role-assignment guard (a role = its whole permission set), Owner-role shield (grants immutable, role undeletable), four lockout paths refused; internal bootstrap bypass; 16 attack tests (127 total)
-- [ ] `PermissionGate` + `packages/permissions` pre-check client
+- [x] `PermissionGate` + `packages/permissions` pre-check client — dependency-free `createAuthorize` (per-request cached, fails closed), server `PermissionGate` factory, client `PermissionsProvider`/`usePermission`; first vitest unit tests in CI; dogfooded across admin-context/company page; **invite/revoke tightened to `platform.member.manage`** (Phase 0 stub retired, UI gated + RPC enforced)
 - [ ] Full RLS test matrix: personas × scopes × the [03](docs/architecture/03-permissions.md) worked examples
 
 **Exit criteria**: worked examples 1–5 from 03 pass as automated tests; role changes visible in audit log; delegation auto-expires (clock-skewed test).
