@@ -44,7 +44,7 @@ Architecture references: [docs/architecture/](docs/architecture/00-overview.md).
 **Goal**: the two-layer model live end-to-end ([03](docs/architecture/03-permissions.md)).
 
 - [x] Migrations: `permissions`, `teams`, `company_roles`, `role_permissions`, `team_memberships`; `authorize()` (AAL2-aware); catalog seed from module definitions — platform catalog seeded (idempotent pattern for modules); scope + cross-company integrity triggers; RLS on the permission tables themselves; `companies.update` is the first authorize() consumer; 25 pgTAP tests
-- [ ] Role templates seeded at company creation (Owner, HR Manager, Accountant, Supervisor, Employee)
+- [x] Role templates seeded at company creation (Owner, HR Manager, Accountant, Supervisor, Employee) — creator becomes Owner in a default team; Owner gets all company-scopable catalog grants, module templates fill in when their keys arrive; existing companies backfilled (first active member → Owner)
 - [ ] `audit_log` primitive + write-path helper (server actions log mutations)
 - [ ] Admin UI (`/c/[slug]/settings`): Teams, Members (invite/assign/suspend), Roles matrix (scope picker, sensitive flags), Delegations (time-bound)
 - [ ] Escalation guards: can't grant what you don't hold; last-Owner protection (tested)
