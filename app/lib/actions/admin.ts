@@ -137,7 +137,7 @@ export async function setRoleGrant(
       scope: formData.get("scope"),
     });
   if (!parsed.success) return { errorKey: "invalidInput" };
-  const { companyId, companySlug, roleId, permissionKey, scope } = parsed.data;
+  const { companySlug, roleId, permissionKey, scope } = parsed.data;
 
   const supabase = await createClient();
   const { data: existing } = await supabase
@@ -165,14 +165,7 @@ export async function setRoleGrant(
     if (insError) return { errorKey: adminErrorKey(insError.code) };
   }
 
-  await audit(
-    companyId,
-    "role.grant_set",
-    "role_permissions",
-    roleId,
-    { permission: permissionKey, scope: existing?.scope ?? "none" },
-    { permission: permissionKey, scope }
-  );
+  // grant changes are audited by DB triggers (permission_change_audit)
   revalidatePath(`/c/${companySlug}/settings/roles`);
   return null;
 }
@@ -229,12 +222,7 @@ export async function assignMembership(
     .single();
   if (error || !data) return { errorKey: adminErrorKey(error?.code) };
 
-  await audit(parsed.data.companyId, "member.assign_role", "team_memberships", data.id, null, {
-    team_id: parsed.data.teamId,
-    member_id: parsed.data.memberId,
-    company_role_id: parsed.data.roleId,
-    valid_to: validTo,
-  });
+  // membership changes are audited by DB triggers (permission_change_audit)
   revalidatePath(`/c/${parsed.data.companySlug}/settings/members`);
   return null;
 }
@@ -253,11 +241,6 @@ export async function removeMembership(
   if (!parsed.success) return { errorKey: "invalidInput" };
 
   const supabase = await createClient();
-  const { data: before } = await supabase
-    .from("team_memberships")
-    .select("team_id, member_id, company_role_id")
-    .eq("id", parsed.data.membershipId)
-    .maybeSingle();
   const { error, count } = await supabase
     .from("team_memberships")
     .delete({ count: "exact" })
@@ -265,14 +248,7 @@ export async function removeMembership(
   if (error) return { errorKey: adminErrorKey(error.code) };
   if (!count) return { errorKey: "notAllowed" };
 
-  await audit(
-    parsed.data.companyId,
-    "member.remove_role",
-    "team_memberships",
-    parsed.data.membershipId,
-    before,
-    null
-  );
+  // membership changes are audited by DB triggers (permission_change_audit)
   revalidatePath(`/c/${parsed.data.companySlug}/settings/members`);
   return null;
 }
