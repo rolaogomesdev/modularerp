@@ -34,7 +34,9 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+    Omit<VariantProps<typeof buttonVariants>, "size"> {
+  /** icon-only buttons must use IconButton (it requires an aria-label) */
+  size?: Exclude<VariantProps<typeof buttonVariants>["size"], "icon">;
   asChild?: boolean;
 }
 
