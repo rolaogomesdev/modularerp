@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/server";
 
 export default async function HomePage() {
   const t = await getTranslations("tenancy");
+  const tProfile = await getTranslations("profile");
   const supabase = await createClient();
   const [{ data: companies }, { data: invitations }] = await Promise.all([
     supabase.from("companies").select("id, name, slug").order("name"),
@@ -19,9 +20,17 @@ export default async function HomePage() {
 
   return (
     <main className="mx-auto flex min-h-dvh max-w-md flex-col gap-8 p-6">
-      <header className="flex flex-col gap-1 pt-6">
-        <h1 className="text-2xl font-semibold">{t("home.title")}</h1>
-        <p className="text-sm text-text-muted">{t("home.subtitle")}</p>
+      <header className="flex items-start justify-between gap-3 pt-6">
+        <div className="flex flex-col gap-1">
+          <h1 className="text-2xl font-semibold">{t("home.title")}</h1>
+          <p className="text-sm text-text-muted">{t("home.subtitle")}</p>
+        </div>
+        <Link
+          href="/me"
+          className="text-sm font-medium text-accent underline-offset-4 hover:underline"
+        >
+          {tProfile("title")}
+        </Link>
       </header>
 
       {invitations && invitations.length > 0 ? (

@@ -95,9 +95,10 @@ export async function proxy(request: NextRequest) {
       response.cookies.delete(RESUME_COOKIE);
       return response;
     }
-    // Auth screens bounce home.
+    // Auth screens bounce home — except enrollment, which an aal2 user may
+    // revisit to add a second authenticator device (/me → security).
     if (PUBLIC_PATHS.has(path) && path !== "/design") return redirect("/");
-    if (path.startsWith("/2fa")) return redirect("/");
+    if (path.startsWith("/2fa") && path !== "/2fa/enroll") return redirect("/");
     return response;
   }
 

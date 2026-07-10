@@ -66,7 +66,7 @@ export default function ChallengePage() {
             autoFocus
             value={code}
             onChange={(e) => setCode(e.target.value)}
-            className="text-center text-xl tracking-[0.5em]"
+            className="text-center font-mono text-xl tracking-widest"
           />
         </Field>
 

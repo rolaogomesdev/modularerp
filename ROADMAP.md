@@ -63,6 +63,9 @@ Architecture references: [docs/architecture/](docs/architecture/00-overview.md).
   - [ ] Follow-up: charts + MoneyInput + FileDrop/CameraCapture arrive with their consumers (dashboards Phase 2-end, Finance Phase 4)
 - [x] Navigation shell: bottom tabs / sidebar, company switcher, notifications bell (Realtime), AssistantLauncher stub — 5 shell primitives in packages/ui (TopBar/BottomNav/Sidebar/AssistantLauncher/OfflineBanner), 4-tab mobile bar + desktop sidebar, DropdownMenu switcher, bell popover (Realtime wiring lands with the notifications primitive), safe-area handled end-to-end (viewport-fit=cover blocker caught in review); 40px icon-target baseline recorded as the accepted standard
 - [ ] Personal profile `/me`: avatar, locale, theme override, notification prefs, security self-service (password, 2FA devices, sessions)
+- [ ] **Distribution pivot (ADR-0004)**: `create_company` → platform-admin only; invitation-only signup (before-user-created hook); owner invitations (`invited_role_template`) that grant Owner on accept; `/admin` v1 (company list + provisioning + invite link); home screen adapts (create form admin-only, contact-Sorusoft empty state)
+  - [ ] Follow-up: enable the before-user-created hook on hosted staging+prod (dashboard config); Sorusoft website project (sorusoft.pt/.com/.net — buy domains, likely separate repo); move app to app.sorusoft.pt (Vercel domains + Supabase Site URL + manifest)
+  - [ ] Follow-up: module entitlement toggles in `/admin` when `company_modules` lands (Phase 3)
 - [ ] Primitives: approvals (+ inbox tab, self-approval refused), notifications, comments & attachments, custom fields (defs UI + form/detail/export integration), CSV import (staged) / export (RLS-scoped)
 - [ ] Event outbox + jobs worker (pg_cron + Edge Function, dead-letter + alert)
 - [ ] `/help` shell serving `docs/manual/` (audience-filtered, searchable)

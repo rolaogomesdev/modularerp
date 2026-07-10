@@ -10,7 +10,7 @@ import {
   Sidebar,
   TopBar,
 } from "@repo/ui";
-import { Settings } from "lucide-react";
+import { Settings, UserRound } from "lucide-react";
 
 import { AssistantStub } from "@/components/shell/assistant-stub";
 import {
@@ -32,6 +32,7 @@ export default async function CompanyLayout({
   const { slug } = await params;
   const t = await getTranslations("shell");
   const tAdmin = await getTranslations("admin");
+  const tProfile = await getTranslations("profile");
   const supabase = await createClient();
 
   const [{ data: company }, { data: companies }] = await Promise.all([
@@ -72,15 +73,27 @@ export default async function CompanyLayout({
           />
         }
         footer={
-          <form action="/auth/signout" method="post">
-            <Button
-              type="submit"
-              variant="ghost"
-              className="w-full justify-start text-text-faint"
+          <div className="flex flex-col gap-1">
+            <Link
+              href="/me"
+              className={cn(
+                buttonVariants({ variant: "ghost" }),
+                "w-full justify-start text-text-muted"
+              )}
             >
-              {t("signOut")}
-            </Button>
-          </form>
+              <UserRound aria-hidden className="size-4" />
+              {tProfile("title")}
+            </Link>
+            <form action="/auth/signout" method="post">
+              <Button
+                type="submit"
+                variant="ghost"
+                className="w-full justify-start text-text-faint"
+              >
+                {t("signOut")}
+              </Button>
+            </form>
+          </div>
         }
       >
         <CompanySidebarNav slug={company.slug} />
@@ -98,6 +111,16 @@ export default async function CompanyLayout({
           <div className="flex items-center gap-1">
             <NotificationsBell />
             {settingsLink}
+            <Link
+              href="/me"
+              className={cn(
+                buttonVariants({ variant: "ghost", size: "icon" }),
+                "text-text-muted"
+              )}
+              aria-label={tProfile("title")}
+            >
+              <UserRound aria-hidden className="size-5" />
+            </Link>
           </div>
         </TopBar>
 

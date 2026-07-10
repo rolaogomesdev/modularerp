@@ -27,6 +27,8 @@ export default function EnrollPage() {
       }
       const { data } = await supabase.auth.mfa.enroll({
         factorType: "totp",
+        // unique per device — GoTrue rejects duplicate friendly names
+        friendlyName: `totp-${Date.now()}`,
       });
       if (data) {
         setFactorId(data.id);
@@ -84,7 +86,7 @@ export default function EnrollPage() {
             alt={t("enroll.qrAlt")}
             width={192}
             height={192}
-            className="rounded-md bg-white p-2"
+            className="rounded-md bg-surface-scan p-2"
           />
         ) : (
           <div
@@ -110,7 +112,7 @@ export default function EnrollPage() {
             required
             value={code}
             onChange={(e) => setCode(e.target.value)}
-            className="text-center text-xl tracking-[0.5em]"
+            className="text-center font-mono text-xl tracking-widest"
           />
         </Field>
 
