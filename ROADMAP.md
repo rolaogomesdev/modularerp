@@ -63,6 +63,9 @@ Architecture references: [docs/architecture/](docs/architecture/00-overview.md).
   - [ ] Follow-up: charts + MoneyInput + FileDrop/CameraCapture arrive with their consumers (dashboards Phase 2-end, Finance Phase 4)
 - [x] Navigation shell: bottom tabs / sidebar, company switcher, notifications bell (Realtime), AssistantLauncher stub — 5 shell primitives in packages/ui (TopBar/BottomNav/Sidebar/AssistantLauncher/OfflineBanner), 4-tab mobile bar + desktop sidebar, DropdownMenu switcher, bell popover (Realtime wiring lands with the notifications primitive), safe-area handled end-to-end (viewport-fit=cover blocker caught in review); 40px icon-target baseline recorded as the accepted standard
 - [ ] Personal profile `/me`: avatar, locale, theme override, notification prefs, security self-service (password, 2FA devices, sessions)
+- [ ] **Distribution pivot (ADR-0004)**: `create_company` → platform-admin only; invitation-only signup (before-user-created hook); owner invitations (`invited_role_template`) that grant Owner on accept; `/admin` v1 (company list + provisioning + invite link); home screen adapts (create form admin-only, contact-Sorusoft empty state)
+  - [ ] Follow-up: enable the before-user-created hook on hosted staging+prod (dashboard config); Sorusoft website project (sorusoft.pt/.com/.net — buy domains, likely separate repo; **"Contact sales" CTA → email to the founders** is the primary conversion); move app to app.sorusoft.pt (Vercel domains + Supabase Site URL + manifest)
+  - [ ] Follow-up: module entitlement toggles in `/admin` when `company_modules` lands (Phase 3)
 - [ ] Primitives: approvals (+ inbox tab, self-approval refused), notifications, comments & attachments, custom fields (defs UI + form/detail/export integration), CSV import (staged) / export (RLS-scoped)
 - [ ] Event outbox + jobs worker (pg_cron + Edge Function, dead-letter + alert)
 - [ ] `/help` shell serving `docs/manual/` (audience-filtered, searchable)
@@ -154,7 +157,8 @@ Architecture references: [docs/architecture/](docs/architecture/00-overview.md).
 
 ## Later / ideas (parking lot)
 
-- **Training module** (courses, certifications, mandatory training — linked to HR records)
+- **Cross-company engagements (platform primitive — the network play)**: consented provider↔client bridges between two companies on the platform. One shared business object, two views, two permission sets, both sides audited in their own company; documents flow via attachments with two-sided grants. `authorize()` per-company evaluation already supports the OR-of-both-sides policy pattern (ADR when the first two-sided module is designed). Generalizes to: external accountants (Finance), maintenance contractors (Tickets), and provider catalogs → marketplace.
+- **Training module — two-sided flagship** (the first cross-company module): providers (e.g. a certified training entity) publish offers, run sessions, upload DTPs + certificates from their side; client companies' HR manage purchased/ongoing/past trainings, their enrolled employees, and receive the documents on their side, filed against HR records. PT compliance built in (DGERT/DTP artifacts). Also serves classic internal courses/certifications linked to HR.
 - **Bookings module** (appointments/reservations — the small-company entry point; resource + staff calendars, AI scheduling assistant)
 - **Checklists module** (production/operation/safety checklists: template builder, scheduled runs, mobile execution, AI review of answers) — small; good early proof of the module contract after HR
 - **Tickets module** (one module, configurable queues: software/IT, production/maintenance, internal requests; SLA timers, AI triage/dedup/suggested resolutions from RAG; consumes events — e.g. failed work order → auto-ticket)

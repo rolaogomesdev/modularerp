@@ -26,6 +26,7 @@
   --color-info: var(--info);
   --color-info-bg: var(--info-bg);
   --color-focus-ring: var(--focus-ring);
+  --color-surface-scan: var(--surface-scan);
 
   /* typography */
   --font-sans: var(--font-sans);

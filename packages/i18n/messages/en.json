@@ -60,6 +60,61 @@
       "unknown": "Something went wrong. Try again — if it persists, contact support."
     }
   },
+  "profile": {
+    "title": "Your profile",
+    "back": "Back",
+    "saved": "Saved.",
+    "save": "Save",
+    "working": "Please wait…",
+    "identity": {
+      "title": "Identity",
+      "nameLabel": "Name",
+      "changeAvatar": "Change photo",
+      "uploading": "Uploading photo",
+      "avatarFailed": "The photo couldn't be uploaded. Use a PNG/JPEG/WebP under 2 MB."
+    },
+    "preferences": {
+      "title": "Preferences",
+      "languageLabel": "Language",
+      "locales": { "pt-PT": "Português", "en": "English" },
+      "themeLabel": "Theme",
+      "themes": {
+        "system": "Follow the device",
+        "light": "Light",
+        "dark": "Dark"
+      }
+    },
+    "notifications": {
+      "title": "Notifications",
+      "approvals": "Approvals waiting for me",
+      "digest": "Weekly summary",
+      "note": "Delivery starts when notifications ship — your choices are saved now."
+    },
+    "security": {
+      "title": "Security",
+      "working": "Please wait…",
+      "newPassword": "New password",
+      "passwordHelp": "At least 8 characters.",
+      "changePassword": "Change password",
+      "passwordSaved": "Password changed.",
+      "devicesTitle": "Two-step verification devices",
+      "unnamedDevice": "Authenticator",
+      "removeDevice": "Remove",
+      "removeFailed": "Couldn't remove the device. Try again.",
+      "addDevice": "Add a device",
+      "deviceNote": "Removing your last device signs you into setup again — that's how you move to a new phone.",
+      "sessionsTitle": "Sessions",
+      "signOutOthers": "Sign out other devices",
+      "otherSessionsDone": "Other devices signed out.",
+      "otherSessionsFailed": "Couldn't sign out the other devices. Try again.",
+      "signOutOthersNote": "Keeps this session; every other browser and phone is signed out."
+    },
+    "errors": {
+      "invalidInput": "Some fields are invalid. Check them and try again.",
+      "notAllowed": "You don't have permission for that.",
+      "unknown": "Something went wrong. Try again — if it persists, contact support."
+    }
+  },
   "shell": {
     "tabs": {
       "home": "Home",

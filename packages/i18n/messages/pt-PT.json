@@ -60,6 +60,61 @@
       "unknown": "Ocorreu um erro. Tente novamente — se persistir, contacte o suporte."
     }
   },
+  "profile": {
+    "title": "O seu perfil",
+    "back": "Voltar",
+    "saved": "Guardado.",
+    "save": "Guardar",
+    "working": "Aguarde…",
+    "identity": {
+      "title": "Identidade",
+      "nameLabel": "Nome",
+      "changeAvatar": "Mudar fotografia",
+      "uploading": "A carregar a fotografia",
+      "avatarFailed": "Não foi possível carregar a fotografia. Use PNG/JPEG/WebP até 2 MB."
+    },
+    "preferences": {
+      "title": "Preferências",
+      "languageLabel": "Idioma",
+      "locales": { "pt-PT": "Português", "en": "English" },
+      "themeLabel": "Tema",
+      "themes": {
+        "system": "Seguir o dispositivo",
+        "light": "Claro",
+        "dark": "Escuro"
+      }
+    },
+    "notifications": {
+      "title": "Notificações",
+      "approvals": "Aprovações à minha espera",
+      "digest": "Resumo semanal",
+      "note": "A entrega começa quando as notificações forem lançadas — as suas escolhas ficam já guardadas."
+    },
+    "security": {
+      "title": "Segurança",
+      "working": "Aguarde…",
+      "newPassword": "Nova palavra-passe",
+      "passwordHelp": "Pelo menos 8 caracteres.",
+      "changePassword": "Mudar a palavra-passe",
+      "passwordSaved": "Palavra-passe alterada.",
+      "devicesTitle": "Dispositivos de verificação em dois passos",
+      "unnamedDevice": "Autenticador",
+      "removeDevice": "Remover",
+      "removeFailed": "Não foi possível remover o dispositivo. Tente novamente.",
+      "addDevice": "Adicionar um dispositivo",
+      "deviceNote": "Remover o último dispositivo leva-o de novo à configuração — é assim que muda para um telemóvel novo.",
+      "sessionsTitle": "Sessões",
+      "signOutOthers": "Terminar sessão nos outros dispositivos",
+      "otherSessionsDone": "Sessões terminadas nos outros dispositivos.",
+      "otherSessionsFailed": "Não foi possível terminar as outras sessões. Tente novamente.",
+      "signOutOthersNote": "Mantém esta sessão; todos os outros navegadores e telemóveis são desligados."
+    },
+    "errors": {
+      "invalidInput": "Alguns campos são inválidos. Verifique-os e tente novamente.",
+      "notAllowed": "Não tem permissão para isso.",
+      "unknown": "Ocorreu um erro. Tente novamente — se persistir, contacte o suporte."
+    }
+  },
   "shell": {
     "tabs": {
       "home": "Início",

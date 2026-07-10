@@ -44,6 +44,9 @@
   --radius-lg: 16px;
   --radius-full: 9999px;
 
+  /* scannable surface: QR codes need light ground in BOTH themes */
+  --surface-scan: oklch(1 0 0);
+
   /* elevation — light theme leans on shadows */
   --shadow-1: 0 1px 2px oklch(0 0 0 / 0.06);
   --shadow-2: 0 2px 8px oklch(0 0 0 / 0.08);
