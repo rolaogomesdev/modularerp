@@ -60,6 +60,39 @@
       "unknown": "Something went wrong. Try again — if it persists, contact support."
     }
   },
+  "shell": {
+    "tabs": {
+      "home": "Home",
+      "modules": "Modules",
+      "approvals": "Approvals",
+      "search": "Search"
+    },
+    "notifications": {
+      "open": "Notifications",
+      "title": "Notifications",
+      "empty": "Nothing yet — approvals and mentions will land here."
+    },
+    "assistant": {
+      "open": "Open the assistant",
+      "title": "Soru Assistant",
+      "body": "Your AI helper is on its way — it will answer questions about your data and guide you through the app. Arriving in a future update.",
+      "close": "Close"
+    },
+    "switcher": {
+      "label": "Switch company",
+      "allCompanies": "All companies"
+    },
+    "offline": "You're offline — changes will be possible again once the connection returns.",
+    "signOut": "Sign out",
+    "stubs": {
+      "modulesTitle": "Modules",
+      "modulesBody": "Business modules — HR, Finance, Production — plug in here as they ship.",
+      "approvalsTitle": "Approvals",
+      "approvalsBody": "Requests waiting for your decision will queue here once approvals arrive.",
+      "searchTitle": "Search",
+      "searchBody": "Company-wide search across everything you can access is coming soon."
+    }
+  },
   "admin": {
     "title": "Settings",
     "subtitle": "Teams, members and roles for {company}.",

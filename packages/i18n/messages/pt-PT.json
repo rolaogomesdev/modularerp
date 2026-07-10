@@ -60,6 +60,39 @@
       "unknown": "Ocorreu um erro. Tente novamente — se persistir, contacte o suporte."
     }
   },
+  "shell": {
+    "tabs": {
+      "home": "Início",
+      "modules": "Módulos",
+      "approvals": "Aprovações",
+      "search": "Pesquisar"
+    },
+    "notifications": {
+      "open": "Notificações",
+      "title": "Notificações",
+      "empty": "Ainda nada — aprovações e menções vão aparecer aqui."
+    },
+    "assistant": {
+      "open": "Abrir o assistente",
+      "title": "Assistente Soru",
+      "body": "O seu ajudante de IA está a caminho — vai responder a perguntas sobre os seus dados e guiá-lo pela aplicação. Chega numa próxima atualização.",
+      "close": "Fechar"
+    },
+    "switcher": {
+      "label": "Mudar de empresa",
+      "allCompanies": "Todas as empresas"
+    },
+    "offline": "Está offline — as alterações voltam a ser possíveis quando a ligação regressar.",
+    "signOut": "Terminar sessão",
+    "stubs": {
+      "modulesTitle": "Módulos",
+      "modulesBody": "Os módulos de negócio — RH, Finanças, Produção — ligam-se aqui à medida que forem lançados.",
+      "approvalsTitle": "Aprovações",
+      "approvalsBody": "Os pedidos à espera da sua decisão vão ficar aqui quando as aprovações chegarem.",
+      "searchTitle": "Pesquisar",
+      "searchBody": "A pesquisa em toda a empresa, sobre tudo a que tem acesso, chega em breve."
+    }
+  },
   "admin": {
     "title": "Definições",
     "subtitle": "Equipas, membros e perfis de {company}.",

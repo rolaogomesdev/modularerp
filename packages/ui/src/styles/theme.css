@@ -48,6 +48,16 @@
   --ease-exit: var(--ease-exit);
 }
 
+/* iOS home-indicator clearance for fixed bottom bars */
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* FAB anchor that rides above the (safe-area-padded) bottom tab bar */
+@utility bottom-safe-fab {
+  bottom: calc(6rem + env(safe-area-inset-bottom));
+}
+
 /*
  * shadcn/ui bridge — shadcn components speak --background/--primary/…;
  * they resolve FROM the semantic tokens so both themes and company accent

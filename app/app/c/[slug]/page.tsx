@@ -1,7 +1,5 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-import { authorizeAny, createAuthorize } from "@repo/permissions";
 
 import { InviteForm } from "@/components/invite-form";
 import { PermissionGate } from "@/components/permission-gate";
@@ -24,14 +22,6 @@ export default async function CompanyHomePage({
     .maybeSingle();
   if (!company) notFound();
 
-  const t2 = await getTranslations("admin");
-  const authorize = createAuthorize(supabase);
-  const canAdmin = await authorizeAny(authorize, company.id, [
-    "platform.member.manage",
-    "platform.team.manage",
-    "platform.role.manage",
-  ]);
-
   const [{ data: members }, { data: directory }] = await Promise.all([
     supabase
       .from("company_members")
@@ -49,15 +39,7 @@ export default async function CompanyHomePage({
   };
 
   return (
-    <main className="flex flex-col gap-6 p-4">
-      {canAdmin ? (
-        <Link
-          href={`/c/${company.slug}/settings`}
-          className="self-end text-sm font-medium text-accent underline-offset-4 hover:underline"
-        >
-          {t2("title")}
-        </Link>
-      ) : null}
+    <main className="mx-auto flex w-full max-w-2xl flex-col gap-6 p-4">
       <section className="rounded-lg border border-border bg-surface p-4 shadow-1">
         <h1 className="text-xl font-semibold">{company.name}</h1>
         <p className="text-sm text-text-muted">
