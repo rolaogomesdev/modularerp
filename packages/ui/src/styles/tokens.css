@@ -10,7 +10,8 @@
  * Company branding may override --accent* only (contrast-checked at save time).
  */
 
-:root {
+:root,
+[data-theme="light"] {
   /* color — light */
   --bg: oklch(0.985 0 0);
   --surface: oklch(1 0 0);
@@ -57,7 +58,8 @@
 
 /* dark values — kept in one block, applied two ways below */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
+  :root:not([data-theme="light"]),
+  [data-theme="dark"] {
     --bg: oklch(0.16 0 0);
     --surface: oklch(0.2 0 0);
     --surface-raised: oklch(0.24 0 0);
@@ -86,7 +88,8 @@
   }
 }
 
-:root[data-theme="dark"] {
+/* any container can opt into a theme (side-by-side previews, future TV mode) */
+[data-theme="dark"] {
   --bg: oklch(0.16 0 0);
   --surface: oklch(0.2 0 0);
   --surface-raised: oklch(0.24 0 0);

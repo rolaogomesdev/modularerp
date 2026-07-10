@@ -58,7 +58,9 @@ Architecture references: [docs/architecture/](docs/architecture/00-overview.md).
 
 **Goal**: everything modules will reuse ([05](docs/architecture/05-data-platform.md), [09](docs/architecture/09-design-system.md)).
 
-- [ ] Design system v1: full token set (both themes), component inventory, screen patterns, both-theme visual regression — **including the desktop/big-screen pass**: every pattern defines phone (390px), desktop (sidebar, side sheets, data tables, multi-column detail) and large-display behaviour; modules never write their own breakpoints
+- [x] Design system v1 (components + tokens): 28 new components across form controls / overlays / display / composed-ERP (PageHeader, StatCard w/ KPI threshold states, ApprovalBanner, Timeline, ResponsiveTable — table on desktop, cards on mobile — EmptyState/ErrorState…), container-scoped theming, `/design` gallery rendering everything side-by-side in both themes; built by 4 parallel agents + 2 adversarial reviewers (1 blocker + 9 minors, all fixed)
+  - [ ] Follow-up: screen-pattern compositions (ListPage/DetailPage/FormSheet/Wizard/Dashboard) land as they get first consumers (nav shell, /me, approvals); automated pixel visual-regression on the gallery (Playwright in CI; local blocked by Smart App Control browsers)
+  - [ ] Follow-up: charts + MoneyInput + FileDrop/CameraCapture arrive with their consumers (dashboards Phase 2-end, Finance Phase 4)
 - [ ] Navigation shell: bottom tabs / sidebar, company switcher, notifications bell (Realtime), AssistantLauncher stub
 - [ ] Personal profile `/me`: avatar, locale, theme override, notification prefs, security self-service (password, 2FA devices, sessions)
 - [ ] Primitives: approvals (+ inbox tab, self-approval refused), notifications, comments & attachments, custom fields (defs UI + form/detail/export integration), CSV import (staged) / export (RLS-scoped)

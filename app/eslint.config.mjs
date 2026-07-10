@@ -16,5 +16,13 @@ export default defineConfig([
       ],
     },
   },
+  {
+    // The /design gallery is a developer-only component showcase — its
+    // specimen strings are not product copy (documented exception).
+    files: ["app/design/**/*.tsx"],
+    rules: {
+      "react/jsx-no-literals": "off",
+    },
+  },
   globalIgnores([".next/**"]),
 ]);
