@@ -99,6 +99,13 @@ export { Skeleton } from "./components/skeleton";
 export { Spinner, spinnerVariants } from "./components/spinner";
 export { Progress } from "./components/progress";
 
+// shell
+export { TopBar } from "./components/top-bar";
+export { BottomNav, BottomNavItem } from "./components/bottom-nav";
+export { Sidebar, SidebarItem } from "./components/sidebar";
+export { AssistantLauncher } from "./components/assistant-launcher";
+export { OfflineBanner } from "./components/offline-banner";
+
 // composed ERP vocabulary
 export { PageHeader } from "./components/page-header";
 export { EmptyState } from "./components/empty-state";

@@ -17,6 +17,8 @@ export async function generateMetadata(): Promise<Metadata> {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  // without this, env(safe-area-inset-*) is 0 and pb-safe no-ops on iOS
+  viewportFit: "cover",
 };
 
 export default async function RootLayout({
