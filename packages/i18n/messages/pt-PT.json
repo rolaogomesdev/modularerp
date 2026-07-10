@@ -9,10 +9,11 @@
     },
     "home": {
       "title": "As suas empresas",
-      "subtitle": "Abra uma empresa ou crie uma nova.",
+      "subtitle": "Tudo o que as suas empresas partilham consigo vive aqui.",
       "yourCompanies": "As suas empresas",
-      "empty": "Ainda não é membro de nenhuma empresa. Crie uma abaixo ou peça uma ligação de convite a um colega.",
-      "createTitle": "Criar uma empresa"
+      "inviteOnly": "Ainda não faz parte de nenhuma empresa. O Soru é configurado para cada empresa pela equipa da Sorusoft — se a sua não está aqui, o convite está a caminho, ou fale connosco em sorusoft.pt.",
+      "createTitle": "Criar uma empresa",
+      "platformAdmin": "Administração da plataforma"
     },
     "create": {
       "nameLabel": "Nome da empresa",
@@ -58,6 +59,35 @@
       "notAllowed": "Não tem permissão para isso. Se o convite é seu, inicie sessão com o email convidado.",
       "inviteInvalid": "Esta ligação de convite é inválida ou já foi usada. Peça uma nova.",
       "unknown": "Ocorreu um erro. Tente novamente — se persistir, contacte o suporte."
+    }
+  },
+  "platform": {
+    "title": "Administração da plataforma",
+    "subtitle": "Operações Sorusoft — empresas como objetos, nunca os seus dados.",
+    "back": "Voltar",
+    "working": "Aguarde…",
+    "provision": {
+      "title": "Aprovisionar uma empresa cliente",
+      "help": "Cria a empresa com os perfis-modelo e emite um convite de Proprietário. Você não se torna membro.",
+      "nameLabel": "Nome da empresa",
+      "slugLabel": "Endereço web",
+      "slugHelp": "O endereço da empresa na aplicação: /c/{slug}",
+      "slugExample": "cliente",
+      "ownerEmailLabel": "Email do proprietário",
+      "ownerEmailHelp": "O convite fica associado a este endereço; ao aceitar, é atribuído o perfil Proprietário.",
+      "submit": "Aprovisionar empresa",
+      "created": "Aprovisionada — envie ao proprietário esta ligação de convite (válida 14 dias):",
+      "copy": "Copiar ligação"
+    },
+    "companies": {
+      "title": "Empresas ({count})",
+      "empty": "Ainda não há empresas aprovisionadas."
+    },
+    "errors": {
+      "invalidInput": "Alguns campos são inválidos. Verifique-os e tente novamente.",
+      "conflict": "Esse endereço web já está ocupado.",
+      "notAllowed": "Não tem acesso à administração da plataforma.",
+      "unknown": "Ocorreu um erro. Tente novamente — se persistir, verifique os registos."
     }
   },
   "profile": {
@@ -268,6 +298,7 @@
       "over_request_rate_limit": "Demasiadas tentativas. Aguarde um minuto e tente novamente.",
       "mfa_verification_failed": "O código não corresponde. Confirme na aplicação e introduza o código atual.",
       "validation_failed": "Alguns campos são inválidos. Verifique-os e tente novamente.",
+      "signup_invite_only": "As contas Soru são criadas por convite. Se a sua empresa usa o Soru, peça uma ligação de convite — ou fale connosco em sorusoft.pt.",
       "unknown": "Ocorreu um erro. Tente novamente — se persistir, contacte o suporte."
     }
   },

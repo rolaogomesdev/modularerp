@@ -1,27 +1,26 @@
 ---
-title: Create your company & invite people
+title: Your company on Soru & inviting people
 audience: [company-admin]
 module: platform
 feature: tenancy
-permissions: []
-path: / → Create a company · /c/[company] → Invite someone
+permissions: [platform.member.manage]
+path: /join/[invitation] → /c/[company] → Invite someone
 countries: [all]
 status: live
 locale: en
-updated: 2026-07-07
+updated: 2026-07-10
 ---
 
-# Create your company & invite people
+# Your company on Soru & inviting people
 
-## Create the company
+## How your company gets onto Soru
 
-**Navigation: home screen (`/`) → *Create a company***
+Companies are set up on Soru **by the Sorusoft team**, configured for what you bought and how you work. When your company is ready you (the owner) receive an **invitation link**:
 
-1. Sign in (see [Signing in & two-step verification](../concepts/sign-in-and-2fa.md)).
-2. On your home screen, fill in **Company name** — the **web address** is suggested automatically (e.g. *Padaria Silva* → `/c/padaria-silva`). You can adjust it: lowercase letters, numbers and hyphens only. It cannot be changed casually later, so pick something short.
-3. Press **Create company**. You land on your new company's page as its first active member.
+1. Open the link and create your account (see [Signing in & two-step verification](../concepts/sign-in-and-2fa.md)), including two-step verification.
+2. Accept the invitation — you land in your company as its **Owner**, with full control: teams, roles, members, settings.
 
-> Creating a company makes you its founder. Role templates (Owner, HR Manager…) arrive with the permissions phase; until then, every active member has the same abilities.
+Want Soru for your company? Talk to us — **sorusoft.pt**.
 
 ## Invite a colleague
 

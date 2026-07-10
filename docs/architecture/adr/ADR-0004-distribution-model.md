@@ -47,3 +47,17 @@ self-serve signup does not fit this motion and invites junk tenants.
   Vercel domain config + Supabase Site URL updates tracked in ROADMAP.
 - `app_role = 'platform_admin'` is granted only via direct database operation
   by the operators (never through the app; self-escalation already test-blocked).
+
+## Security notes (from adversarial review)
+
+- **Owner-invitation hijack, closed**: email-match is not email-ownership.
+  Two defenses: (a) `my_invitations()` never surfaces the token for
+  role-bearing invitations — owner onboarding requires the out-of-band link
+  (token possession), test-proven; (b) `enable_confirmations = true` so an
+  invited email must be inbox-verified before the account is usable (local
+  config set; **hosted staging/prod must set the same in the dashboard** —
+  config.toml is not applied by the migrate pipeline).
+- **Accepted residual — signup enumeration**: invitation-gated signup lets an
+  attacker learn which emails have a pending invitation (403 vs success). Not
+  fully removable without abandoning the gate; mitigated by generic messaging
+  and to be paired with rate-limiting/captcha on the signup endpoint.

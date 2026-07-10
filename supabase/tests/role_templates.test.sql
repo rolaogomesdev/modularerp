@@ -9,6 +9,10 @@ values
   ('00000000-0000-0000-0000-0000000000a4', 'ugo@example.com'),
   ('00000000-0000-0000-0000-0000000000b4', 'rui@example.com');
 
+-- ADR-0004: company creation requires platform_admin - promote the founder persona
+update public.profiles set app_role = 'platform_admin'
+where id = '00000000-0000-0000-0000-0000000000a4';
+
 create function test_login(user_id uuid, aal text)
 returns void language plpgsql as $$
 begin
