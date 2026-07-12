@@ -154,8 +154,23 @@
     },
     "notifications": {
       "open": "Notificações",
+      "openWithCount": "{count, plural, =0 {Notificações} one {Notificações, # por ler} other {Notificações, # por ler}}",
       "title": "Notificações",
-      "empty": "Ainda nada — aprovações e menções vão aparecer aqui."
+      "empty": "Ainda nada — aprovações e menções vão aparecer aqui.",
+      "markAllRead": "Marcar todas como lidas",
+      "kinds": {
+        "generic": "Tem uma nova notificação",
+        "company": {
+          "welcome": "Bem-vindo a {company} no Soru."
+        },
+        "approval": {
+          "requested": "{requester} pediu a sua aprovação: {what}",
+          "decided": "O seu pedido \"{what}\" foi {decision}."
+        },
+        "member": {
+          "assigned": "Foi-lhe atribuído o perfil {role}."
+        }
+      }
     },
     "assistant": {
       "open": "Abrir o assistente",

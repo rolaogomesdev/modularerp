@@ -154,8 +154,23 @@
     },
     "notifications": {
       "open": "Notifications",
+      "openWithCount": "{count, plural, =0 {Notifications} one {Notifications, # unread} other {Notifications, # unread}}",
       "title": "Notifications",
-      "empty": "Nothing yet — approvals and mentions will land here."
+      "empty": "Nothing yet — approvals and mentions will land here.",
+      "markAllRead": "Mark all read",
+      "kinds": {
+        "generic": "You have a new notification",
+        "company": {
+          "welcome": "Welcome to {company} on Soru."
+        },
+        "approval": {
+          "requested": "{requester} requested your approval: {what}",
+          "decided": "Your request \"{what}\" was {decision}."
+        },
+        "member": {
+          "assigned": "You were assigned the {role} role."
+        }
+      }
     },
     "assistant": {
       "open": "Open the assistant",
