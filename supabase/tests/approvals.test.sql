@@ -18,30 +18,30 @@ insert into public.companies (id, name, slug)
 values ('a0000000-0000-0000-0000-000000000c01', 'Leave Co', 'leave-co');
 
 insert into public.teams (id, company_id, name) values
-  ('a0000000-0000-0000-0000-0000000000ta', 'a0000000-0000-0000-0000-000000000c01', 'Team A'),
-  ('a0000000-0000-0000-0000-0000000000tb', 'a0000000-0000-0000-0000-000000000c01', 'Team B');
+  ('a0000000-0000-0000-0000-0000000000aa', 'a0000000-0000-0000-0000-000000000c01', 'Team A'),
+  ('a0000000-0000-0000-0000-0000000000bb', 'a0000000-0000-0000-0000-000000000c01', 'Team B');
 
 insert into public.company_members (id, company_id, user_id, status, joined_at) values
-  ('a0000000-0000-0000-0000-00000000m002', 'a0000000-0000-0000-0000-000000000c01', '00000000-0000-0000-0000-0000000000f2', 'active', now()),
-  ('a0000000-0000-0000-0000-00000000m003', 'a0000000-0000-0000-0000-000000000c01', '00000000-0000-0000-0000-0000000000f3', 'active', now()),
-  ('a0000000-0000-0000-0000-00000000m004', 'a0000000-0000-0000-0000-000000000c01', '00000000-0000-0000-0000-0000000000f4', 'active', now()),
-  ('a0000000-0000-0000-0000-00000000m005', 'a0000000-0000-0000-0000-000000000c01', '00000000-0000-0000-0000-0000000000f5', 'active', now());
+  ('a0000000-0000-0000-0000-00000000d002', 'a0000000-0000-0000-0000-000000000c01', '00000000-0000-0000-0000-0000000000f2', 'active', now()),
+  ('a0000000-0000-0000-0000-00000000d003', 'a0000000-0000-0000-0000-000000000c01', '00000000-0000-0000-0000-0000000000f3', 'active', now()),
+  ('a0000000-0000-0000-0000-00000000d004', 'a0000000-0000-0000-0000-000000000c01', '00000000-0000-0000-0000-0000000000f4', 'active', now()),
+  ('a0000000-0000-0000-0000-00000000d005', 'a0000000-0000-0000-0000-000000000c01', '00000000-0000-0000-0000-0000000000f5', 'active', now());
 
 insert into public.permissions (key, module, resource, action, allowed_scopes, description)
 values ('test.leave.approve', 'test', 'leave', 'approve', '{team,company}', 'leave approval');
 
 insert into public.company_roles (id, company_id, name) values
-  ('a0000000-0000-0000-0000-0000000r0001', 'a0000000-0000-0000-0000-000000000c01', 'Team Approver'),
-  ('a0000000-0000-0000-0000-0000000r0002', 'a0000000-0000-0000-0000-000000000c01', 'Company Approver');
+  ('a0000000-0000-0000-0000-0000000e0001', 'a0000000-0000-0000-0000-000000000c01', 'Team Approver'),
+  ('a0000000-0000-0000-0000-0000000e0002', 'a0000000-0000-0000-0000-000000000c01', 'Company Approver');
 
 insert into public.role_permissions (company_role_id, permission_key, scope) values
-  ('a0000000-0000-0000-0000-0000000r0001', 'test.leave.approve', 'team'),
-  ('a0000000-0000-0000-0000-0000000r0002', 'test.leave.approve', 'company');
+  ('a0000000-0000-0000-0000-0000000e0001', 'test.leave.approve', 'team'),
+  ('a0000000-0000-0000-0000-0000000e0002', 'test.leave.approve', 'company');
 
 -- julia approves Team A only; karl approves company-wide
 insert into public.team_memberships (company_id, team_id, member_id, company_role_id, created_by) values
-  ('a0000000-0000-0000-0000-000000000c01', 'a0000000-0000-0000-0000-0000000000ta', 'a0000000-0000-0000-0000-00000000m003', 'a0000000-0000-0000-0000-0000000r0001', '00000000-0000-0000-0000-0000000000f2'),
-  ('a0000000-0000-0000-0000-000000000c01', 'a0000000-0000-0000-0000-0000000000ta', 'a0000000-0000-0000-0000-00000000m004', 'a0000000-0000-0000-0000-0000000r0002', '00000000-0000-0000-0000-0000000000f2');
+  ('a0000000-0000-0000-0000-000000000c01', 'a0000000-0000-0000-0000-0000000000aa', 'a0000000-0000-0000-0000-00000000d003', 'a0000000-0000-0000-0000-0000000e0001', '00000000-0000-0000-0000-0000000000f2'),
+  ('a0000000-0000-0000-0000-000000000c01', 'a0000000-0000-0000-0000-0000000000aa', 'a0000000-0000-0000-0000-00000000d004', 'a0000000-0000-0000-0000-0000000e0002', '00000000-0000-0000-0000-0000000000f2');
 
 create function test_login(user_id uuid, aal text)
 returns void language plpgsql as $$
@@ -66,7 +66,7 @@ select test_login('00000000-0000-0000-0000-0000000000f2', 'aal2');
 select lives_ok(
   $$insert into ids
     select 'req_a', public.request_approval(
-      'a0000000-0000-0000-0000-000000000c01', 'a0000000-0000-0000-0000-0000000000ta',
+      'a0000000-0000-0000-0000-000000000c01', 'a0000000-0000-0000-0000-0000000000aa',
       'test.leave.approve', 'test.leave', 'leave', null,
       jsonb_build_object('what', '3 days off'))$$,
   'requester creates a Team A approval'
@@ -106,7 +106,7 @@ select test_logout();
 select test_login('00000000-0000-0000-0000-0000000000f2', 'aal2');
 insert into ids
   select 'req_b', public.request_approval(
-    'a0000000-0000-0000-0000-000000000c01', 'a0000000-0000-0000-0000-0000000000tb',
+    'a0000000-0000-0000-0000-000000000c01', 'a0000000-0000-0000-0000-0000000000bb',
     'test.leave.approve', 'test.leave', 'leave', null, '{}'::jsonb);
 select test_logout();
 
@@ -124,7 +124,7 @@ select test_logout();
 select test_login('00000000-0000-0000-0000-0000000000f4', 'aal2');
 insert into ids
   select 'req_karl', public.request_approval(
-    'a0000000-0000-0000-0000-000000000c01', 'a0000000-0000-0000-0000-0000000000ta',
+    'a0000000-0000-0000-0000-000000000c01', 'a0000000-0000-0000-0000-0000000000aa',
     'test.leave.approve', 'test.leave', 'leave', null, '{}'::jsonb);
 select throws_ok(
   $$select public.decide_approval((select id from ids where label = 'req_karl'), true, null)$$,
@@ -187,7 +187,7 @@ select throws_ok(
 -- fresh request for the suspended-requester case
 insert into ids
   select 'req_c', public.request_approval(
-    'a0000000-0000-0000-0000-000000000c01', 'a0000000-0000-0000-0000-0000000000ta',
+    'a0000000-0000-0000-0000-000000000c01', 'a0000000-0000-0000-0000-0000000000aa',
     'test.leave.approve', 'test.leave', null, null, '{}'::jsonb);
 select test_logout();
 
