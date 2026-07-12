@@ -61,6 +61,38 @@
       "unknown": "Ocorreu um erro. Tente novamente — se persistir, contacte o suporte."
     }
   },
+  "approvals": {
+    "title": "Aprovações",
+    "subtitle": "Pedidos à espera da sua decisão, e os que você fez.",
+    "toDecide": "{count, plural, =0 {A decidir} other {A decidir (#)}}",
+    "nothingToDecide": "Nada à espera da sua decisão.",
+    "myRequests": "Os meus pedidos",
+    "noRequests": "Ainda não fez pedidos.",
+    "approve": "Aprovar",
+    "reject": "Recusar",
+    "cancel": "Cancelar pedido",
+    "addReason": "Adicionar uma nota",
+    "reasonPlaceholder": "Nota opcional para o requerente…",
+    "status": {
+      "pending": "Pendente",
+      "approved": "Aprovado",
+      "rejected": "Recusado",
+      "cancelled": "Cancelado"
+    },
+    "kinds": {
+      "generic": "Pedido de aprovação",
+      "demo": {
+        "request": "Pedido de demonstração: {what}"
+      }
+    },
+    "errors": {
+      "invalidInput": "Algo correu mal nessa ação. Tente novamente.",
+      "selfApproval": "Não pode decidir o seu próprio pedido — precisa de outra pessoa.",
+      "notAllowed": "Não tem permissão para decidir isto.",
+      "gone": "Este pedido já foi decidido ou retirado.",
+      "unknown": "Ocorreu um erro. Tente novamente — se persistir, contacte o suporte."
+    }
+  },
   "platform": {
     "title": "Administração da plataforma",
     "subtitle": "Operações Sorusoft — empresas como objetos, nunca os seus dados.",
