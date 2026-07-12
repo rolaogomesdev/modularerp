@@ -35,13 +35,24 @@ export default async function CompanyLayout({
   const tProfile = await getTranslations("profile");
   const supabase = await createClient();
 
-  const [{ data: company }, { data: companies }] = await Promise.all([
-    supabase.from("companies").select("id, name, slug").eq("slug", slug).maybeSingle(),
-    supabase.from("companies").select("id, name, slug").order("name"),
-  ]);
+  const [{ data: company }, { data: companies }, { data: user }] =
+    await Promise.all([
+      supabase.from("companies").select("id, name, slug").eq("slug", slug).maybeSingle(),
+      supabase.from("companies").select("id, name, slug").order("name"),
+      supabase.auth.getUser().then((r) => ({ data: r.data.user })),
+    ]);
 
   // RLS returns nothing for non-members — indistinguishable from not existing.
   if (!company) notFound();
+
+  // recent notifications for this recipient in THIS company (RLS also scopes
+  // to their own rows; the company filter keeps the bell context-relevant)
+  const { data: notifications } = await supabase
+    .from("notifications")
+    .select("id, kind, params, href, read_at, created_at")
+    .eq("company_id", company.id)
+    .order("created_at", { ascending: false })
+    .limit(20);
 
   const authorize = createAuthorize(supabase);
   const canAdmin = await authorizeAny(authorize, company.id, [
@@ -109,7 +120,14 @@ export default async function CompanyLayout({
             />
           </div>
           <div className="flex items-center gap-1">
-            <NotificationsBell />
+            {user ? (
+              <NotificationsBell
+                key={company.id}
+                userId={user.id}
+                companyId={company.id}
+                initial={notifications ?? []}
+              />
+            ) : null}
             {settingsLink}
             <Link
               href="/me"

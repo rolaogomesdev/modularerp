@@ -63,5 +63,13 @@ begin
   insert into public.company_members (company_id, user_id, status, joined_at)
   select demo_company_id, (du->>'id')::uuid, 'active', now()
   from jsonb_array_elements(demo_users) as du;
+
+  -- a couple of demo notifications so the bell is alive in local dev
+  perform public.notify(demo_company_id, 'd0000000-0000-0000-0000-000000000001',
+    'company.welcome', jsonb_build_object('company', 'Demo Lda'));
+  perform public.notify(demo_company_id, 'd0000000-0000-0000-0000-000000000001',
+    'approval.requested',
+    jsonb_build_object('requester', 'João Santos', 'what', 'Absence request'),
+    'hr_absences', null, '/c/demo/approvals');
 end;
 $$;
