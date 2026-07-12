@@ -14,5 +14,9 @@ const KNOWN = new Set([
 export function authErrorKey(error: AuthError | null): string {
   const code = error?.code ?? "";
   if (code === "email_exists") return "user_already_exists";
+  // ADR-0004: the before-user-created hook rejects uninvited signups
+  if (error?.message?.toLowerCase().includes("invitation")) {
+    return "signup_invite_only";
+  }
   return KNOWN.has(code) ? code : "unknown";
 }

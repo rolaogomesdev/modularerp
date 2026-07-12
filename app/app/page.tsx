@@ -9,14 +9,39 @@ export default async function HomePage() {
   const t = await getTranslations("tenancy");
   const tProfile = await getTranslations("profile");
   const supabase = await createClient();
-  const [{ data: companies }, { data: invitations }] = await Promise.all([
-    supabase.from("companies").select("id, name, slug").order("name"),
-    supabase.rpc("my_invitations") as unknown as Promise<{
-      data:
-        | { invite_token: string; company_name: string; invited_at: string }[]
-        | null;
-    }>,
-  ]);
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  // Scope "your companies" to ACTUAL memberships — a platform admin's metadata
+  // policy would otherwise surface every provisioned tenant here (ADR-0004).
+  const [{ data: memberships }, { data: invitations }, { data: profile }] =
+    await Promise.all([
+      supabase
+        .from("company_members")
+        .select("companies(id, name, slug)")
+        .eq("user_id", user?.id ?? "")
+        .eq("status", "active"),
+      supabase.rpc("my_invitations") as unknown as Promise<{
+        data:
+          | { invite_token: string; company_name: string; invited_at: string }[]
+          | null;
+      }>,
+      supabase
+        .from("profiles")
+        .select("app_role")
+        .eq("id", user?.id ?? "")
+        .maybeSingle(),
+    ]);
+  type CompanyRef = { id: string; name: string; slug: string };
+  const companies = (memberships ?? [])
+    .flatMap((m) => {
+      // PostgREST types an embedded to-one as an array — normalize
+      const c = m.companies as unknown as CompanyRef | CompanyRef[] | null;
+      if (!c) return [];
+      return Array.isArray(c) ? c : [c];
+    })
+    .sort((a, b) => a.name.localeCompare(b.name));
+  const isPlatformAdmin = profile?.app_role === "platform_admin";
 
   return (
     <main className="mx-auto flex min-h-dvh max-w-md flex-col gap-8 p-6">
@@ -76,14 +101,25 @@ export default async function HomePage() {
         </section>
       ) : (
         <p className="rounded-lg border border-border bg-surface p-4 text-sm text-text-muted shadow-1">
-          {t("home.empty")}
+          {t("home.inviteOnly")}
         </p>
       )}
 
-      <section className="flex flex-col gap-3 rounded-lg border border-border bg-surface p-4 shadow-1">
-        <h2 className="font-medium">{t("home.createTitle")}</h2>
-        <CreateCompanyForm />
-      </section>
+      {/* ADR-0004: company creation is provisioning — platform admins only */}
+      {isPlatformAdmin ? (
+        <>
+          <section className="flex flex-col gap-3 rounded-lg border border-border bg-surface p-4 shadow-1">
+            <h2 className="font-medium">{t("home.createTitle")}</h2>
+            <CreateCompanyForm />
+          </section>
+          <Link
+            href="/admin"
+            className="self-start text-sm font-medium text-accent underline-offset-4 hover:underline"
+          >
+            {t("home.platformAdmin")}
+          </Link>
+        </>
+      ) : null}
 
       <form action="/auth/signout" method="post" className="pb-6 text-center">
         <button

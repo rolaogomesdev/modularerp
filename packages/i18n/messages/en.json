@@ -9,10 +9,11 @@
     },
     "home": {
       "title": "Your companies",
-      "subtitle": "Open a company, or create a new one.",
+      "subtitle": "Everything your companies share with you lives here.",
       "yourCompanies": "Your companies",
-      "empty": "You're not a member of any company yet. Create one below, or ask a colleague for an invitation link.",
-      "createTitle": "Create a company"
+      "inviteOnly": "You're not part of any company yet. Soru is set up for each company by the Sorusoft team — if yours isn't here, your invitation is on its way, or talk to us at sorusoft.pt.",
+      "createTitle": "Create a company",
+      "platformAdmin": "Platform administration"
     },
     "create": {
       "nameLabel": "Company name",
@@ -58,6 +59,35 @@
       "notAllowed": "You don't have permission for that. If this is your invitation, sign in with the invited email address.",
       "inviteInvalid": "This invitation link is invalid or was already used. Ask for a new one.",
       "unknown": "Something went wrong. Try again — if it persists, contact support."
+    }
+  },
+  "platform": {
+    "title": "Platform administration",
+    "subtitle": "Sorusoft operations — companies as objects, never their data.",
+    "back": "Back",
+    "working": "Please wait…",
+    "provision": {
+      "title": "Provision a customer company",
+      "help": "Creates the company with its role templates and issues an owner invitation. You don't become a member.",
+      "nameLabel": "Company name",
+      "slugLabel": "Web address",
+      "slugHelp": "The company's address in the app: /c/{slug}",
+      "slugExample": "customer",
+      "ownerEmailLabel": "Owner's email",
+      "ownerEmailHelp": "The invitation is tied to this address; accepting grants the Owner role.",
+      "submit": "Provision company",
+      "created": "Provisioned — send the owner this invitation link (valid 14 days):",
+      "copy": "Copy link"
+    },
+    "companies": {
+      "title": "Companies ({count})",
+      "empty": "No companies provisioned yet."
+    },
+    "errors": {
+      "invalidInput": "Some fields are invalid. Check them and try again.",
+      "conflict": "That web address is already taken.",
+      "notAllowed": "You don't have platform administration access.",
+      "unknown": "Something went wrong. Try again — if it persists, check the logs."
     }
   },
   "profile": {
@@ -268,6 +298,7 @@
       "over_request_rate_limit": "Too many attempts. Wait a minute and try again.",
       "mfa_verification_failed": "That code didn't match. Check the app and enter the current code.",
       "validation_failed": "Some fields are invalid. Check them and try again.",
+      "signup_invite_only": "Soru accounts are created by invitation. If your company uses Soru, ask for an invitation link — or talk to us at sorusoft.pt.",
       "unknown": "Something went wrong. Try again — if it persists, contact support."
     }
   },

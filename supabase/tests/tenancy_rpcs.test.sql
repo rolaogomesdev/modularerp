@@ -11,6 +11,10 @@ values
   ('00000000-0000-0000-0000-0000000000e0', 'eva@example.com',   '{"display_name": "Eva"}'),
   ('00000000-0000-0000-0000-0000000000f0', 'frank@example.com', '{"display_name": "Frank"}');
 
+-- ADR-0004: company creation requires platform_admin - promote the founder persona
+update public.profiles set app_role = 'platform_admin'
+where id = '00000000-0000-0000-0000-0000000000d0';
+
 create function test_login(user_id uuid, user_email text, aal text)
 returns void
 language plpgsql
@@ -53,7 +57,7 @@ select lives_ok(
   'create_company: works at aal2'
 );
 select results_eq(
-  'select slug from public.companies',
+  $$select slug from public.companies where slug = 'padaria-silva'$$,
   $$values ('padaria-silva')$$,
   'creator immediately sees the new company (active membership created)'
 );

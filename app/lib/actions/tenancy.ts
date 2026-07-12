@@ -5,10 +5,9 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 
 import { createClient } from "@/lib/supabase/server";
+import { SLUG_RE } from "@/lib/slug";
 
 export type ActionState = { errorKey: string } | { token: string } | null;
-
-const SLUG_RE = /^[a-z0-9](?:[a-z0-9-]{0,38}[a-z0-9])?$/;
 
 const createCompanySchema = z.object({
   name: z.string().trim().min(2).max(80),

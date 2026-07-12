@@ -224,7 +224,11 @@ enable_signup = true
 # addresses. If disabled, only the new email is required to confirm.
 double_confirm_changes = true
 # If enabled, users need to confirm their email address before signing in.
-enable_confirmations = false
+# ADR-0004: ON so an invited email must be OWNED (inbox-verified) before an
+# account is usable — closes the owner-invitation pre-registration hijack.
+# Hosted staging/prod: set the same in Dashboard → Auth → Email (config.toml
+# is not pushed by the migrate pipeline).
+enable_confirmations = true
 # If enabled, users will need to reauthenticate or have logged in recently to change their password.
 secure_password_change = false
 # Controls the minimum amount of time that must pass before sending another signup confirmation or password reset email.
@@ -293,6 +297,12 @@ account_sid = ""
 message_service_sid = ""
 # DO NOT commit your Twilio auth token to git. Use environment variable substitution instead:
 auth_token = "env(SUPABASE_AUTH_SMS_TWILIO_AUTH_TOKEN)"
+
+# ADR-0004: signups are invitation-only — enforced before user creation.
+# Hosted staging/prod: enable the same hook in Dashboard → Auth → Hooks.
+[auth.hook.before_user_created]
+enabled = true
+uri = "pg-functions://postgres/public/hook_restrict_signup"
 
 # Multi-factor-authentication is available to Supabase Pro plan.
 [auth.mfa]

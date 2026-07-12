@@ -5,16 +5,7 @@ import { useTranslations } from "next-intl";
 import { Button, Field, Input } from "@repo/ui";
 
 import { createCompany, type ActionState } from "@/lib/actions/tenancy";
-
-function slugify(name: string): string {
-  return name
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .slice(0, 40);
-}
+import { SLUG_PATTERN, slugify } from "@/lib/slug";
 
 export function CreateCompanyForm() {
   const t = useTranslations("tenancy");
@@ -49,7 +40,7 @@ export function CreateCompanyForm() {
           id="slug"
           name="slug"
           required
-          pattern="[a-z0-9](?:[a-z0-9-]{0,38}[a-z0-9])?"
+          pattern={SLUG_PATTERN}
           value={slug}
           onChange={(e) => {
             setSlugTouched(true);
