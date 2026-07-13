@@ -61,6 +61,38 @@
       "unknown": "Something went wrong. Try again — if it persists, contact support."
     }
   },
+  "approvals": {
+    "title": "Approvals",
+    "subtitle": "Requests waiting for your decision, and the ones you've made.",
+    "toDecide": "{count, plural, =0 {To decide} other {To decide (#)}}",
+    "nothingToDecide": "Nothing waiting for your decision.",
+    "myRequests": "My requests",
+    "noRequests": "You haven't made any requests.",
+    "approve": "Approve",
+    "reject": "Reject",
+    "cancel": "Cancel request",
+    "addReason": "Add a note",
+    "reasonPlaceholder": "Optional note for the requester…",
+    "status": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "cancelled": "Cancelled"
+    },
+    "kinds": {
+      "generic": "Approval request",
+      "demo": {
+        "request": "Demo request: {what}"
+      }
+    },
+    "errors": {
+      "invalidInput": "Something was off with that action. Try again.",
+      "selfApproval": "You can't decide your own request — it needs someone else.",
+      "notAllowed": "You don't have permission to decide this.",
+      "gone": "This request was already decided or withdrawn.",
+      "unknown": "Something went wrong. Try again — if it persists, contact support."
+    }
+  },
   "platform": {
     "title": "Platform administration",
     "subtitle": "Sorusoft operations — companies as objects, never their data.",

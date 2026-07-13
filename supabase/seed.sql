@@ -64,12 +64,28 @@ begin
   select demo_company_id, (du->>'id')::uuid, 'active', now()
   from jsonb_array_elements(demo_users) as du;
 
-  -- a couple of demo notifications so the bell is alive in local dev
+  -- Marta runs Demo Lda (Owner) so the app is demoable end to end
+  perform public.bootstrap_company_owner(
+    demo_company_id,
+    (select id from public.company_members
+     where company_id = demo_company_id and user_id = 'd0000000-0000-0000-0000-000000000001'),
+    'd0000000-0000-0000-0000-000000000001');
+
+  -- a demo pending approval: João asks, Owner Marta can decide it
+  insert into public.approvals
+    (company_id, team_id, requester_id, permission_key, kind, summary)
+  values (
+    demo_company_id,
+    (select id from public.teams where company_id = demo_company_id and name = 'Geral'),
+    'd0000000-0000-0000-0000-000000000002', 'platform.member.manage', 'demo.request',
+    jsonb_build_object('what', 'Add a new teammate'));
+
+  -- demo notifications so the bell is alive in local dev
   perform public.notify(demo_company_id, 'd0000000-0000-0000-0000-000000000001',
     'company.welcome', jsonb_build_object('company', 'Demo Lda'));
   perform public.notify(demo_company_id, 'd0000000-0000-0000-0000-000000000001',
     'approval.requested',
-    jsonb_build_object('requester', 'João Santos', 'what', 'Absence request'),
-    'hr_absences', null, '/c/demo/approvals');
+    jsonb_build_object('requester', 'João Santos', 'what', 'Add a new teammate'),
+    'approvals', null, '/c/demo/approvals');
 end;
 $$;
