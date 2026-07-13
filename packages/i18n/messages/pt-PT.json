@@ -61,6 +61,48 @@
       "unknown": "Ocorreu um erro. Tente novamente — se persistir, contacte o suporte."
     }
   },
+  "customFields": {
+    "title": "Campos personalizados",
+    "subtitle": "Adicione os seus próprios campos aos registos — aparecem automaticamente nos formulários, detalhes e exportações.",
+    "back": "Voltar às definições",
+    "empty": "Ainda não há campos personalizados.",
+    "createTitle": "Adicionar um campo",
+    "createHelp": "O campo aparece onde o registo for mostrado, assim que esse módulo estiver ativo.",
+    "entity": "Aplica-se a",
+    "entities": {
+      "hr_employees": "Colaboradores (RH)",
+      "hr_absences": "Ausências (RH)",
+      "finance_invoices": "Faturas (Finanças)",
+      "finance_expenses": "Despesas (Finanças)"
+    },
+    "labelEn": "Etiqueta (Inglês)",
+    "labelPt": "Etiqueta (Português)",
+    "key": "Chave do campo",
+    "keyHelp": "Minúsculas, letras/números/underscores. Não pode ser alterada depois.",
+    "type": "Tipo",
+    "types": {
+      "text": "Texto",
+      "number": "Número",
+      "date": "Data",
+      "select": "Escolha",
+      "multi_select": "Escolha múltipla",
+      "boolean": "Sim/Não"
+    },
+    "required": "Obrigatório",
+    "options": "Opções",
+    "optionsHelp": "Separadas por vírgulas, ex.: Pequeno, Médio, Grande.",
+    "archive": "Arquivar",
+    "restore": "Restaurar",
+    "archived": "Arquivado",
+    "create": "Adicionar campo",
+    "working": "Aguarde…",
+    "errors": {
+      "invalidInput": "Alguns campos são inválidos. Verifique-os e tente novamente.",
+      "duplicate": "Já existe um campo com essa chave para este registo.",
+      "notAllowed": "Não tem permissão para gerir campos personalizados.",
+      "unknown": "Ocorreu um erro. Tente novamente — se persistir, contacte o suporte."
+    }
+  },
   "approvals": {
     "title": "Aprovações",
     "subtitle": "Pedidos à espera da sua decisão, e os que você fez.",
@@ -241,7 +283,9 @@
       "members": "Membros",
       "membersHint": "Atribua perfis, suspenda acessos",
       "roles": "Perfis",
-      "rolesHint": "O que cada perfil pode fazer"
+      "rolesHint": "O que cada perfil pode fazer",
+      "fields": "Campos personalizados",
+      "fieldsHint": "Adicione campos aos registos — sem código"
     },
     "teams": {
       "title": "Equipas",
