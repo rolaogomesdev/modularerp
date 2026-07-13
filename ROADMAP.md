@@ -66,8 +66,14 @@ Architecture references: [docs/architecture/](docs/architecture/00-overview.md).
 - [x] **Distribution pivot (ADR-0004)**: `create_company` → platform-admin only; invitation-only signup (before-user-created hook); owner invitations (`invited_role_template`) grant Owner on accept **via the emailed link only** (my_invitations hides privileged tokens — takeover guard); `/admin` v1 (company list + provisioning + invite link); home adapts (create/admin gated, contact-Sorusoft empty state, memberships-scoped list); 15 pivot tests (168 total)
   - [ ] Follow-up: enable the before-user-created hook on hosted staging+prod (dashboard config); Sorusoft website project (sorusoft.pt/.com/.net — buy domains, likely separate repo; **"Contact sales" CTA → email to the founders** is the primary conversion); move app to app.sorusoft.pt (Vercel domains + Supabase Site URL + manifest)
   - [ ] Follow-up: module entitlement toggles in `/admin` when `company_modules` lands (Phase 3)
-- [ ] Primitives: approvals (+ inbox tab, self-approval refused), notifications, comments & attachments, custom fields (defs UI + form/detail/export integration), CSV import (staged) / export (RLS-scoped)
-- [ ] Event outbox + jobs worker (pg_cron + Edge Function, dead-letter + alert)
+- [ ] Primitives
+  - [x] Approvals (four-eyes, + inbox tab, self-approval refused) — PR #28
+  - [x] Notifications (Realtime, locale-rendered kind+params) — PR #27
+  - [x] Custom fields (defs UI + RLS + zod renderer; form/detail/export integration follows with first module) — PR #30
+  - [x] CSV export (RLS-scoped; `toCsv` RFC 4180 util + members roster as first consumer) — PR #31
+  - [ ] Comments & attachments
+  - [ ] CSV import (staged)
+- [x] Event outbox — `publish_event()` definer + audit-gated reads (PR #29); jobs worker (pg_cron + Edge Function, dead-letter + alert) still to come
 - [ ] `/help` shell serving `docs/manual/` (audience-filtered, searchable)
 - [ ] `security_events` collectors: auth hooks, denial counters, export volume (module UI comes in Phase 8)
 

@@ -313,7 +313,14 @@
       "remove": "Remover",
       "until": "até {date}",
       "delegationsTitle": "Atribuições temporárias",
-      "delegationsEmpty": "Sem atribuições temporárias."
+      "delegationsEmpty": "Sem atribuições temporárias.",
+      "export": {
+        "button": "Exportar CSV",
+        "name": "Nome",
+        "status": "Estado",
+        "email": "Email do convite",
+        "roles": "Equipas e perfis"
+      }
     },
     "roles": {
       "title": "Perfis",
