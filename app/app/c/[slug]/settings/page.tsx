@@ -31,6 +31,12 @@ export default async function SettingsPage({
       title: t("nav.roles"),
       hint: t("nav.rolesHint"),
     },
+    {
+      show: can.manageCustomFields,
+      href: `/c/${slug}/settings/fields`,
+      title: t("nav.fields"),
+      hint: t("nav.fieldsHint"),
+    },
   ].filter((card) => card.show);
 
   return (

@@ -6,7 +6,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
   },
   "dependencies": {
     "@repo/ai": "workspace:*",
@@ -32,6 +33,7 @@
     "eslint": "^9.39.4",
     "eslint-config-next": "^16.2.10",
     "postcss": "^8.5.16",
-    "tailwindcss": "^4.3.2"
+    "tailwindcss": "^4.3.2",
+    "vitest": "^4.1.10"
   }
 }

@@ -61,6 +61,48 @@
       "unknown": "Something went wrong. Try again — if it persists, contact support."
     }
   },
+  "customFields": {
+    "title": "Custom fields",
+    "subtitle": "Add your own fields to records — they appear in forms, details and exports automatically.",
+    "back": "Back to settings",
+    "empty": "No custom fields yet.",
+    "createTitle": "Add a field",
+    "createHelp": "The field appears wherever its record is shown, once that module is enabled.",
+    "entity": "Applies to",
+    "entities": {
+      "hr_employees": "Employees (HR)",
+      "hr_absences": "Absences (HR)",
+      "finance_invoices": "Invoices (Finance)",
+      "finance_expenses": "Expenses (Finance)"
+    },
+    "labelEn": "Label (English)",
+    "labelPt": "Label (Português)",
+    "key": "Field key",
+    "keyHelp": "Lowercase, letters/numbers/underscores. Can't be changed later.",
+    "type": "Type",
+    "types": {
+      "text": "Text",
+      "number": "Number",
+      "date": "Date",
+      "select": "Choice",
+      "multi_select": "Multiple choice",
+      "boolean": "Yes/No"
+    },
+    "required": "Required",
+    "options": "Choices",
+    "optionsHelp": "Comma-separated, e.g. Small, Medium, Large.",
+    "archive": "Archive",
+    "restore": "Restore",
+    "archived": "Archived",
+    "create": "Add field",
+    "working": "Please wait…",
+    "errors": {
+      "invalidInput": "Some fields are invalid. Check them and try again.",
+      "duplicate": "A field with that key already exists for this record.",
+      "notAllowed": "You don't have permission to manage custom fields.",
+      "unknown": "Something went wrong. Try again — if it persists, contact support."
+    }
+  },
   "approvals": {
     "title": "Approvals",
     "subtitle": "Requests waiting for your decision, and the ones you've made.",
@@ -241,7 +283,9 @@
       "members": "Members",
       "membersHint": "Assign roles, suspend access",
       "roles": "Roles",
-      "rolesHint": "What each role is allowed to do"
+      "rolesHint": "What each role is allowed to do",
+      "fields": "Custom fields",
+      "fieldsHint": "Add fields to records — no code needed"
     },
     "teams": {
       "title": "Teams",

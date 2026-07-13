@@ -9,6 +9,7 @@ export type AdminContext = {
     manageTeams: boolean;
     manageMembers: boolean;
     manageRoles: boolean;
+    manageCustomFields: boolean;
     readAudit: boolean;
     any: boolean;
   };
@@ -30,21 +31,24 @@ export async function getAdminContext(slug: string): Promise<AdminContext> {
 
   const authorize = createAuthorize(supabase);
   const companyId = company.id;
-  const [manageTeams, manageMembers, manageRoles, readAudit] = await Promise.all([
-    authorize({ permission: "platform.team.manage", companyId }),
-    authorize({ permission: "platform.member.manage", companyId }),
-    authorize({ permission: "platform.role.manage", companyId }),
-    authorize({ permission: "platform.audit.read", companyId }),
-  ]);
+  const [manageTeams, manageMembers, manageRoles, manageCustomFields, readAudit] =
+    await Promise.all([
+      authorize({ permission: "platform.team.manage", companyId }),
+      authorize({ permission: "platform.member.manage", companyId }),
+      authorize({ permission: "platform.role.manage", companyId }),
+      authorize({ permission: "platform.customfield.manage", companyId }),
+      authorize({ permission: "platform.audit.read", companyId }),
+    ]);
 
   const can = {
     manageTeams,
     manageMembers,
     manageRoles,
+    manageCustomFields,
     readAudit,
     // readAudit deliberately excluded until an audit sub-page exists —
     // link visibility (company page) and hub access must agree.
-    any: manageTeams || manageMembers || manageRoles,
+    any: manageTeams || manageMembers || manageRoles || manageCustomFields,
   };
   if (!can.any) notFound();
 
