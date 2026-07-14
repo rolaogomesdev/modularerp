@@ -116,14 +116,22 @@ export async function GET(
     { header: t("members.export.roles"), value: (r) => r.roles },
   ];
 
-  // Record the export: satisfies the audit trail and seeds the "export
-  // volume" security signal (rows leaving the tenant, by whom, when).
-  await supabase.rpc("log_audit", {
-    target_company_id: company.id,
-    audit_action: "member.export",
-    audit_entity: "company_members",
-    entry_after: { format: "csv", rows: rows.length },
-  });
+  // Record the export twice, by design: once in the audit_log (the human/legal
+  // "who did what" trail) and once in security_events as a data.export signal
+  // (the machine-facing stream the Phase 8 detections watch for mass export).
+  await Promise.all([
+    supabase.rpc("log_audit", {
+      target_company_id: company.id,
+      audit_action: "member.export",
+      audit_entity: "company_members",
+      entry_after: { format: "csv", rows: rows.length },
+    }),
+    supabase.rpc("record_security_event", {
+      event_kind: "data.export",
+      target_company: company.id,
+      event_details: { entity: "company_members", format: "csv", rows: rows.length },
+    }),
+  ]);
 
   // Lead with a UTF-8 BOM so spreadsheet apps render Portuguese accents.
   const body = "﻿" + toCsv(columns, rows);
