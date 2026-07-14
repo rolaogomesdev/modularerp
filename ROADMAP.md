@@ -77,10 +77,12 @@ Architecture references: [docs/architecture/](docs/architecture/00-overview.md).
 - [ ] `/help` shell serving `docs/manual/` (audience-filtered, searchable)
 - [ ] `security_events` — detection substrate (append-only, RLS-gated, `record_security_event()` write path); module UI comes in Phase 8
   - [x] Table + RLS + write path + privilege-change & member-status collectors (triggers) — PR #32 (19 pgTAP)
-  - [x] Export-volume collector: members CSV export records a `data.export` signal
+  - [x] Export-volume collector: members + leave CSV exports record a `data.export` signal
   - [ ] Collectors still to wire: auth hooks (failed login/MFA/new device), `authorize()` denial counters
+- [x] **Leave-request toy flow (Phase 2 exit criterion)** — `hr_leave_requests` + `hr.absence.*` catalog + `submit_leave_request()` door composing approvals (four-eyes) + notifications + audit + event outbox (`hr.leave.requested/approved/rejected`); custom fields (entity `hr_absences`) flow form → detail → CSV export untouched by code; role-template grants (Owner/HR Manager/Supervisor/Employee) backfilled; seeds `modules/hr` (Phase 3 grows it); 19 pgTAP — PR #34
+  - [ ] Follow-up: apply module template grants to companies created *after* this migration (lands with the module registry, Phase 3); on-device both-theme visual pass
 
-**Exit criteria**: demo "leave request" toy flow exercises approvals+notifications+audit+events end-to-end on a phone in both themes; a custom field created by an admin appears in form/detail/export untouched by code.
+**Exit criteria**: demo "leave request" toy flow exercises approvals+notifications+audit+events end-to-end on a phone in both themes; a custom field created by an admin appears in form/detail/export untouched by code. → **flow shipped (PR #34), pgTAP-proven end-to-end; on-device both-theme pass still advised.**
 **Manual due**: personal profile & security page; approvals inbox; notifications; import/export how-tos.
 
 ## Phase 3 — HR core (first module)

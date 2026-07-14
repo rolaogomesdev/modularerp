@@ -27,6 +27,8 @@
     "company": {
       "meta": "Country: {country} · Currency: {currency}",
       "emptyState": "This company is empty for now — modules (HR, Finance…) arrive in the next phases.",
+      "leave": "Leave requests",
+      "leaveHint": "Request time off and track approvals.",
       "members": "Members",
       "unknownMember": "Member",
       "status": {
@@ -103,6 +105,54 @@
       "unknown": "Something went wrong. Try again — if it persists, contact support."
     }
   },
+  "leave": {
+    "title": "Leave requests",
+    "subtitle": "Time off requests and where they stand.",
+    "back": "Back",
+    "new": "New request",
+    "newTitle": "Request leave",
+    "newSubtitle": "Your request goes to an approver — you'll be notified of the decision.",
+    "detailTitle": "Leave request",
+    "empty": "No leave requests yet.",
+    "unknownMember": "Member",
+    "subject": "Employee",
+    "type": "Type",
+    "types": {
+      "vacation": "Vacation",
+      "sick": "Sick leave",
+      "personal": "Personal",
+      "other": "Other"
+    },
+    "startDate": "Start date",
+    "endDate": "End date",
+    "reason": "Reason",
+    "reasonHelp": "Optional — a short note for the approver.",
+    "status": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "cancelled": "Cancelled"
+    },
+    "decideHint": "Decide this request in Approvals →",
+    "submit": "Submit request",
+    "working": "Please wait…",
+    "yes": "Yes",
+    "no": "No",
+    "export": {
+      "button": "Export CSV",
+      "subject": "Employee",
+      "type": "Type",
+      "start": "Start date",
+      "end": "End date",
+      "status": "Status",
+      "reason": "Reason"
+    },
+    "errors": {
+      "invalidInput": "Some fields are invalid. Check them and try again.",
+      "notAllowed": "You don't have permission to request leave here.",
+      "unknown": "Something went wrong. Try again — if it persists, contact support."
+    }
+  },
   "approvals": {
     "title": "Approvals",
     "subtitle": "Requests waiting for your decision, and the ones you've made.",
@@ -125,6 +175,9 @@
       "generic": "Approval request",
       "demo": {
         "request": "Demo request: {what}"
+      },
+      "hr": {
+        "absence": "Leave · {type, select, vacation {Vacation} sick {Sick leave} personal {Personal} other {Leave}} · {from} → {to}"
       }
     },
     "errors": {

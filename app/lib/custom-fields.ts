@@ -91,3 +91,31 @@ export function buildCustomSchema(defs: CustomFieldDef[]): z.ZodType<Record<stri
   }
   return z.object(shape).strip();
 }
+
+/**
+ * Collect `cf_<key>` form fields into a raw values object, coerced by type.
+ * Pair with buildCustomSchema(defs).parse(...) in a module's server action —
+ * that is the whole "custom fields save without per-field code" contract.
+ */
+export function collectCustomValues(
+  formData: FormData,
+  defs: CustomFieldDef[]
+): Record<string, unknown> {
+  const raw: Record<string, unknown> = {};
+  for (const def of defs) {
+    if (def.archived_at) continue;
+    const name = `cf_${def.key}`;
+    if (def.type === "boolean") {
+      raw[def.key] = formData.get(name) === "on";
+    } else if (def.type === "multi_select") {
+      raw[def.key] = formData.getAll(name).map(String);
+    } else if (def.type === "number") {
+      const v = formData.get(name);
+      raw[def.key] = v === null || v === "" ? undefined : Number(v);
+    } else {
+      const v = formData.get(name);
+      raw[def.key] = v === null || v === "" ? undefined : String(v);
+    }
+  }
+  return raw;
+}

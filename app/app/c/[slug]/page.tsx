@@ -1,5 +1,7 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
+import { CalendarClock } from "lucide-react";
 
 import { InviteForm } from "@/components/invite-form";
 import { PermissionGate } from "@/components/permission-gate";
@@ -50,6 +52,17 @@ export default async function CompanyHomePage({
         </p>
         <p className="mt-2 text-sm text-text-muted">{t("company.emptyState")}</p>
       </section>
+
+      <Link
+        href={`/c/${company.slug}/hr/leave`}
+        className="flex items-center gap-3 rounded-lg border border-border bg-surface p-4 shadow-1 transition-colors duration-fast hover:bg-accent-muted"
+      >
+        <CalendarClock className="size-5 shrink-0 text-accent" aria-hidden />
+        <span className="flex min-w-0 flex-col">
+          <span className="font-medium">{t("company.leave")}</span>
+          <span className="text-sm text-text-muted">{t("company.leaveHint")}</span>
+        </span>
+      </Link>
 
       <section className="flex flex-col gap-3">
         <h2 className="text-sm font-medium text-text-muted">
