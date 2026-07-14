@@ -69,7 +69,9 @@ Architecture references: [docs/architecture/](docs/architecture/00-overview.md).
 - [ ] Primitives: approvals (+ inbox tab, self-approval refused), notifications, comments & attachments, custom fields (defs UI + form/detail/export integration), CSV import (staged) / export (RLS-scoped)
 - [ ] Event outbox + jobs worker (pg_cron + Edge Function, dead-letter + alert)
 - [ ] `/help` shell serving `docs/manual/` (audience-filtered, searchable)
-- [ ] `security_events` collectors: auth hooks, denial counters, export volume (module UI comes in Phase 8)
+- [ ] `security_events` — detection substrate (append-only, RLS-gated, `record_security_event()` write path); module UI comes in Phase 8
+  - [x] Table + RLS + write path + privilege-change & member-status collectors (triggers) — PR #32 (19 pgTAP)
+  - [ ] Collectors still to wire: export volume (`data.export`), auth hooks (failed login/MFA/new device), `authorize()` denial counters
 
 **Exit criteria**: demo "leave request" toy flow exercises approvals+notifications+audit+events end-to-end on a phone in both themes; a custom field created by an admin appears in form/detail/export untouched by code.
 **Manual due**: personal profile & security page; approvals inbox; notifications; import/export how-tos.
