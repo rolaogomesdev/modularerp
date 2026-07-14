@@ -29,23 +29,27 @@ CI runs this on every PR ([01-tech-stack.md](01-tech-stack.md)). A migration add
 
 Requested as a first-class module: per-company **intrusion detection and security operations**, enabled like any module, with its own catalog (`security.*` permissions → a "Security Officer" role template). It consumes streams the platform already produces — audit log, auth events, `ai_actions`, permission changes, export activity — so its cost is mostly UI + detection rules.
 
-**Signals collected (platform level, always on):**
+**Signals collected (platform level, always on).** The stream shipped in Phase 2 as the *detection substrate* — deliberately distinct from `audit_log` (the human/legal "who did what" trail): this is the machine-facing "what looks risky" stream, queried by kind/severity. As-built (`20260713160000_security_events.sql`):
 
 ```sql
-create table security_events (
-  id          bigint generated always as identity primary key,
-  company_id  uuid,                    -- null = platform-scope event
-  user_id     uuid,
-  kind        text not null,           -- 'auth.login_failed', 'auth.mfa_failed', 'auth.new_device',
-                                       -- 'authz.denied_spike', 'data.mass_export', 'perm.role_changed',
-                                       -- 'perm.delegation_created', 'ai.budget_spike', 'session.impossible_travel'
-  severity    text not null,           -- info | warning | critical
-  context     jsonb not null,          -- ip, user_agent, counts, entity refs
-  created_at  timestamptz not null default now()
+create table public.security_events (
+  id            uuid primary key default gen_random_uuid(),  -- UUID PK per repo convention
+  company_id    uuid references public.companies (id),        -- null = platform-scope event
+  actor_user_id uuid references public.profiles (id),         -- null = anonymous / system collector
+  kind          text not null check (kind ~ '^[a-z0-9_]+\.[a-z0-9_]+$'),
+                                       -- 'privilege.change', 'privilege.member_status' (live);
+                                       -- 'data.export', 'auth.login_failed', 'access.denied' (as collectors land)
+  severity      text not null default 'info' check (severity in ('info','warning','critical')),
+  source_ip     inet,
+  user_agent    text,
+  details       jsonb,
+  created_at    timestamptz not null default now()
 );
 ```
 
-Producers: auth hooks (failed logins, MFA failures, new device/location), `authorize()` denial counters (a user hammering permissions they don't have), export endpoints (row counts), role/membership triggers, AI usage meter.
+Append-only (no update/delete grants, like `audit_log`); reads are sensitive — `platform_admin` sees all (incl. platform-scope), and within a company `platform.audit.read` holders see that company's events, until the Security module ships its own Officer permission. Written only via `record_security_event()` (definer; stamps the actor, guards cross-company/AAL2) and `service_role` collectors.
+
+Producers: **live now** — role/membership triggers and member suspend/restore (`privilege.change`, `privilege.member_status`). **Landing as their call sites/hooks arrive** — export endpoints (row counts → `data.export`), auth hooks (failed logins, MFA failures, new device/location), `authorize()` denial counters (a user hammering permissions they don't have), AI usage meter.
 
 **Detections (v1 = rule-based, evaluated by a scheduled job; AI-assisted later):**
 - brute force / credential stuffing (failed-login velocity per account and per IP);
