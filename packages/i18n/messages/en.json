@@ -313,7 +313,14 @@
       "remove": "Remove",
       "until": "until {date}",
       "delegationsTitle": "Time-bound assignments",
-      "delegationsEmpty": "No time-bound assignments."
+      "delegationsEmpty": "No time-bound assignments.",
+      "export": {
+        "button": "Export CSV",
+        "name": "Name",
+        "status": "Status",
+        "email": "Invited email",
+        "roles": "Teams & roles"
+      }
     },
     "roles": {
       "title": "Roles",

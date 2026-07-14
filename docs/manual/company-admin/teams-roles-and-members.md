@@ -8,7 +8,7 @@ path: /c/[company] → Settings
 countries: [all]
 status: live
 locale: en
-updated: 2026-07-08
+updated: 2026-07-13
 ---
 
 # Teams, roles & member access
@@ -44,6 +44,14 @@ A person can hold different roles in different teams (Supervisor in one, plain E
 Suspending a member cuts their access to the company **instantly** — every screen, list and report becomes unavailable to them, including anything already open on their phone. Nothing is deleted: their records, history and role assignments stay exactly as they were. Press **Reactivate** and everything works again as before.
 
 Use suspension when someone leaves, loses a device, or you need to pause access while something is investigated. It is always safe — it is a switch, not an eraser.
+
+## Export the member list
+
+**Navigation: `/c/[company]` → *Settings* → *Members* → *Export CSV***
+
+Downloads the current roster as a CSV file — one row per person, with their name (or invited email), status, and every team-and-role they hold. Open it in Excel, Numbers or Google Sheets for a headcount, an audit, or to hand to payroll.
+
+The export contains **exactly what you can see** and nothing more: it runs with your own permissions, so it never reveals members or teams you would not otherwise have access to. Portuguese names and accents come through correctly. The download itself is recorded, like every other action.
 
 ## Edit what a role can do
 

@@ -138,7 +138,15 @@ export default async function MembersSettingsPage({
         >
           {t("back")}
         </Link>
-        <h1 className="text-xl font-semibold">{t("members.title")}</h1>
+        <div className="flex items-center justify-between gap-2">
+          <h1 className="text-xl font-semibold">{t("members.title")}</h1>
+          <a
+            href={`/c/${company.slug}/settings/members/export`}
+            className="shrink-0 rounded-md border border-border px-3 py-1.5 text-sm font-medium text-accent transition-colors duration-fast hover:bg-accent-muted"
+          >
+            {t("members.export.button")}
+          </a>
+        </div>
       </header>
 
       <section className="flex flex-col gap-2">
