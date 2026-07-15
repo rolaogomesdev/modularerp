@@ -74,7 +74,8 @@ Architecture references: [docs/architecture/](docs/architecture/00-overview.md).
   - [ ] Comments & attachments
   - [ ] CSV import (staged)
 - [x] Event outbox — `publish_event()` definer + audit-gated reads (PR #29); jobs worker (pg_cron + Edge Function, dead-letter + alert) still to come
-- [ ] `/help` shell serving `docs/manual/` (audience-filtered, searchable)
+- [x] `/help` shell serving `docs/manual/` (audience-filtered) — build-time generation (`scripts/build-manual.mjs` → `manual.generated.ts`, no request-time fs), `my_manual_audiences()` resolver (member/team-manager/company-admin/platform-admin), list + article routes, relative `.md` cross-links rewritten to `/help`, nav entry; 7 pgTAP + 10/10 E2E — PR #35
+  - [ ] Follow-up: full-text search across the manual; localized (pt-PT) manual content (front-matter is `locale: en` today); the AI help assistant reads this same corpus (Phase 6)
 - [ ] `security_events` — detection substrate (append-only, RLS-gated, `record_security_event()` write path); module UI comes in Phase 8
   - [x] Table + RLS + write path + privilege-change & member-status collectors (triggers) — PR #32 (19 pgTAP)
   - [x] Export-volume collector: members + leave CSV exports record a `data.export` signal
