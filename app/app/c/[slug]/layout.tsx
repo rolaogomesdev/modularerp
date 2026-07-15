@@ -10,7 +10,7 @@ import {
   Sidebar,
   TopBar,
 } from "@repo/ui";
-import { Settings, UserRound } from "lucide-react";
+import { CircleHelp, Settings, UserRound } from "lucide-react";
 
 import { AssistantStub } from "@/components/shell/assistant-stub";
 import {
@@ -33,6 +33,7 @@ export default async function CompanyLayout({
   const t = await getTranslations("shell");
   const tAdmin = await getTranslations("admin");
   const tProfile = await getTranslations("profile");
+  const tHelp = await getTranslations("help");
   const supabase = await createClient();
 
   const [{ data: company }, { data: companies }, { data: user }] =
@@ -86,6 +87,16 @@ export default async function CompanyLayout({
         footer={
           <div className="flex flex-col gap-1">
             <Link
+              href="/help"
+              className={cn(
+                buttonVariants({ variant: "ghost" }),
+                "w-full justify-start text-text-muted"
+              )}
+            >
+              <CircleHelp aria-hidden className="size-4" />
+              {tHelp("title")}
+            </Link>
+            <Link
               href="/me"
               className={cn(
                 buttonVariants({ variant: "ghost" }),
@@ -129,6 +140,16 @@ export default async function CompanyLayout({
               />
             ) : null}
             {settingsLink}
+            <Link
+              href="/help"
+              className={cn(
+                buttonVariants({ variant: "ghost", size: "icon" }),
+                "text-text-muted"
+              )}
+              aria-label={tHelp("title")}
+            >
+              <CircleHelp aria-hidden className="size-5" />
+            </Link>
             <Link
               href="/me"
               className={cn(

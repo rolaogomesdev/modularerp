@@ -3,3 +3,58 @@
 
 /* pick up token utility classes used inside packages/ui components */
 @source "../../packages/ui/src";
+
+/* Rendered manual (/help) content — trusted markdown from docs/manual, styled
+   with design tokens so it reads like the rest of the app in both themes. */
+.manual-prose {
+  @apply text-sm leading-relaxed text-text;
+}
+.manual-prose > :first-child {
+  @apply mt-0;
+}
+.manual-prose h1 {
+  @apply mt-8 mb-4 text-2xl font-semibold;
+}
+.manual-prose h2 {
+  @apply mt-8 mb-2 text-lg font-semibold;
+}
+.manual-prose h3 {
+  @apply mt-6 mb-1 font-semibold;
+}
+.manual-prose p {
+  @apply my-3;
+}
+.manual-prose ul {
+  @apply my-3 list-disc pl-5;
+}
+.manual-prose ol {
+  @apply my-3 list-decimal pl-5;
+}
+.manual-prose li {
+  @apply my-1;
+}
+.manual-prose a {
+  @apply text-accent underline underline-offset-2;
+}
+.manual-prose strong {
+  @apply font-medium text-text;
+}
+.manual-prose code {
+  @apply rounded bg-accent-muted px-1.5 py-0.5 font-mono text-xs;
+}
+.manual-prose blockquote {
+  @apply my-3 border-l-2 border-border pl-3 text-text-muted;
+}
+.manual-prose hr {
+  @apply my-6 border-border;
+}
+.manual-prose table {
+  @apply my-4 block w-full overflow-x-auto border-collapse text-left;
+}
+.manual-prose th,
+.manual-prose td {
+  @apply border border-border px-3 py-1.5;
+}
+.manual-prose th {
+  @apply bg-surface-raised font-medium;
+}

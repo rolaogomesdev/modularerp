@@ -153,6 +153,23 @@
       "unknown": "Ocorreu um erro. Tente novamente — se persistir, contacte o suporte."
     }
   },
+  "help": {
+    "title": "Ajuda",
+    "subtitle": "Guias para usar o Soru, à medida do que faz.",
+    "back": "Voltar",
+    "empty": "Ainda não há páginas de ajuda disponíveis.",
+    "backToIndex": "← Toda a ajuda",
+    "updated": "Atualizado a {date}",
+    "sections": {
+      "member": "Para todos",
+      "team-manager": "Para gestores de equipa",
+      "company-admin": "Para administradores da empresa",
+      "platform-admin": "Para a equipa da plataforma",
+      "concepts": "Conceitos",
+      "modules": "Módulos",
+      "general": "Geral"
+    }
+  },
   "approvals": {
     "title": "Aprovações",
     "subtitle": "Pedidos à espera da sua decisão, e os que você fez.",
