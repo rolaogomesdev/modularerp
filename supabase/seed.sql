@@ -87,5 +87,51 @@ begin
     'approval.requested',
     jsonb_build_object('requester', 'João Santos', 'what', 'Add a new teammate'),
     'approvals', null, '/c/demo/approvals');
+
+  -- HR module: grant the leave permissions to Demo Lda's templates and make the
+  -- two employees real members of Geral, so the leave-request flow is demoable
+  -- (João/Rita can request; Owner Marta approves — four eyes).
+  perform public.grant_hr_absence_templates(demo_company_id);
+
+  insert into public.team_memberships (company_id, team_id, member_id, company_role_id, created_by)
+  select demo_company_id,
+         (select id from public.teams where company_id = demo_company_id and name = 'Geral'),
+         cm.id,
+         (select id from public.company_roles where company_id = demo_company_id and template_key = 'employee'),
+         'd0000000-0000-0000-0000-000000000001'
+  from public.company_members cm
+  where cm.company_id = demo_company_id
+    and cm.user_id in ('d0000000-0000-0000-0000-000000000002', 'd0000000-0000-0000-0000-000000000003')
+  on conflict (team_id, member_id, company_role_id) do nothing;
+
+  -- a demo pending leave request: João asks for vacation; Owner Marta can decide it
+  insert into public.hr_leave_requests
+    (id, company_id, member_id, subject_user_id, team_id, leave_type, start_date, end_date, reason, created_by)
+  values (
+    'd0000000-0000-0000-0000-00000000f001', demo_company_id,
+    (select id from public.company_members where company_id = demo_company_id
+       and user_id = 'd0000000-0000-0000-0000-000000000002'),
+    'd0000000-0000-0000-0000-000000000002',
+    (select id from public.teams where company_id = demo_company_id and name = 'Geral'),
+    'vacation', '2026-08-03', '2026-08-14', 'Férias de verão em família',
+    'd0000000-0000-0000-0000-000000000002');
+
+  insert into public.approvals
+    (id, company_id, team_id, requester_id, permission_key, kind, entity, entity_id, summary)
+  values (
+    'd0000000-0000-0000-0000-00000000a002', demo_company_id,
+    (select id from public.teams where company_id = demo_company_id and name = 'Geral'),
+    'd0000000-0000-0000-0000-000000000002', 'hr.absence.approve', 'hr.absence',
+    'hr_leave_requests', 'd0000000-0000-0000-0000-00000000f001',
+    jsonb_build_object('type', 'vacation', 'from', '2026-08-03', 'to', '2026-08-14'));
+
+  update public.hr_leave_requests
+    set approval_id = 'd0000000-0000-0000-0000-00000000a002'
+    where id = 'd0000000-0000-0000-0000-00000000f001';
+
+  perform public.notify(demo_company_id, 'd0000000-0000-0000-0000-000000000001',
+    'approval.requested',
+    jsonb_build_object('type', 'vacation', 'from', '2026-08-03', 'to', '2026-08-14'),
+    'approvals', 'd0000000-0000-0000-0000-00000000a002', '/c/demo/approvals');
 end;
 $$;

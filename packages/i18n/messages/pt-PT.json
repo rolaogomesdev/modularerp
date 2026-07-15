@@ -27,6 +27,8 @@
     "company": {
       "meta": "País: {country} · Moeda: {currency}",
       "emptyState": "Esta empresa está vazia por agora — os módulos (RH, Finanças…) chegam nas próximas fases.",
+      "leave": "Pedidos de ausência",
+      "leaveHint": "Peça ausências e acompanhe as aprovações.",
       "members": "Membros",
       "unknownMember": "Membro",
       "status": {
@@ -103,6 +105,54 @@
       "unknown": "Ocorreu um erro. Tente novamente — se persistir, contacte o suporte."
     }
   },
+  "leave": {
+    "title": "Pedidos de ausência",
+    "subtitle": "Pedidos de ausência e o seu estado.",
+    "back": "Voltar",
+    "new": "Novo pedido",
+    "newTitle": "Pedir ausência",
+    "newSubtitle": "O seu pedido segue para um aprovador — será notificado da decisão.",
+    "detailTitle": "Pedido de ausência",
+    "empty": "Ainda não há pedidos de ausência.",
+    "unknownMember": "Membro",
+    "subject": "Colaborador",
+    "type": "Tipo",
+    "types": {
+      "vacation": "Férias",
+      "sick": "Baixa médica",
+      "personal": "Pessoal",
+      "other": "Outro"
+    },
+    "startDate": "Data de início",
+    "endDate": "Data de fim",
+    "reason": "Motivo",
+    "reasonHelp": "Opcional — uma nota breve para o aprovador.",
+    "status": {
+      "pending": "Pendente",
+      "approved": "Aprovado",
+      "rejected": "Recusado",
+      "cancelled": "Cancelado"
+    },
+    "decideHint": "Decidir este pedido em Aprovações →",
+    "submit": "Enviar pedido",
+    "working": "Aguarde…",
+    "yes": "Sim",
+    "no": "Não",
+    "export": {
+      "button": "Exportar CSV",
+      "subject": "Colaborador",
+      "type": "Tipo",
+      "start": "Data de início",
+      "end": "Data de fim",
+      "status": "Estado",
+      "reason": "Motivo"
+    },
+    "errors": {
+      "invalidInput": "Alguns campos são inválidos. Verifique-os e tente novamente.",
+      "notAllowed": "Não tem permissão para pedir ausência aqui.",
+      "unknown": "Ocorreu um erro. Tente novamente — se persistir, contacte o suporte."
+    }
+  },
   "approvals": {
     "title": "Aprovações",
     "subtitle": "Pedidos à espera da sua decisão, e os que você fez.",
@@ -125,6 +175,9 @@
       "generic": "Pedido de aprovação",
       "demo": {
         "request": "Pedido de demonstração: {what}"
+      },
+      "hr": {
+        "absence": "Ausência · {type, select, vacation {Férias} sick {Baixa médica} personal {Pessoal} other {Ausência}} · {from} → {to}"
       }
     },
     "errors": {
